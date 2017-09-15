@@ -8,10 +8,15 @@ import java.util.Scanner;
 
 
 public class SimpleAlgorithm {
-
+	
+	private static int number = 0;
+	private static double doublenumber = 0;
+	
+	public static int digits[];
+	
 	public static void main(String[] args) {
 		Scanner cin = new Scanner(System.in);
-		int choice = 0, number = 0, num1 = 0, num2 = 0, exponent = 0;
+		int choice = 0, num1 = 0, num2 = 0, exponent = 0;
 		double base = 0.0;
 		System.out.println("Welcome to the simple algorithms");
 		do {
@@ -22,8 +27,8 @@ public class SimpleAlgorithm {
 		System.out.println("4. Powers");
 		System.out.print("Please choose an option: ");
 		choice = cin.nextInt();
-			if(choice != 3 && choice !=4) {
-			System.out.print("Number: ");
+			if(choice != 3 && choice !=4 && choice != 6) {
+			System.out.print("Number 1: ");
 			 number = cin.nextInt();
 			}else if(choice == 3){
 			System.out.print("Please enter the first number: ");
@@ -55,9 +60,9 @@ public class SimpleAlgorithm {
 			System.out.println("The base of " + base + " raised to " + exponent + " is " + power(base, exponent));
 			}
 		}else if(choice == 5) {
-			downDigit(number);
+			downDigits(number);
 		}else if(choice == 6) {
-			
+			countDigits(doublenumber);
 		}else if(choice == 7) {
 			
 		}else if(choice == 8) {
@@ -116,15 +121,24 @@ public class SimpleAlgorithm {
 		}
 	}
 	
-	private static int downDigit(int num) { // num is the number, n is the nth digit
-		int digit = 0, mod = 1;
-		do {
-			 mod *= 10;
-			 System.out.println(mod);
-			 System.out.println(num/mod);
-			 System.out.println(mod%10);
-			//digit = (num/mod)/(mod%10);
-			return digit;
-		}while(mod != 1000000);
+	private static int downDigits(int num) {
+		int digit = 0, hold = 0;
+		
+		digit = num%10;
+		System.out.print(digit);
+		return 0;
 	}
+	
+	private static int findDigit(int num, int n) {
+		return 0;
+	}
+	
+	private static int countDigits(double num) {
+		return 0;
+	}
+	
+	
+	
+	
+	
 }
