@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class SimpleAlgorithm {
 	public static void main(String[] args) {
+		@SuppressWarnings("resource")
 		Scanner cin = new Scanner(System.in);
 		int choice = 0, num1 = 0, num2 = 0, exponent = 0, number = 0;
 		double base = 0.0, doublenum = 0;
@@ -106,6 +107,7 @@ public class SimpleAlgorithm {
 		System.out.println("Thank you for using simple algorithm, good bye!");
 	}
 	
+	
 	private static void factors(int num) { // Factors function
 		System.out.print("The Factors of " + num + " are: ");
 		for(int i = 1; i < num; i++) {
@@ -134,7 +136,6 @@ public class SimpleAlgorithm {
 	
 	private static double power(double base, int exponent) { // Power function, cause we cant use .pow() :(
 		// To calculate the power we first get the power
-		Scanner cin = new Scanner(System.in);
 		double poweredint = 0;
 		
 		if(exponent == 0) {
