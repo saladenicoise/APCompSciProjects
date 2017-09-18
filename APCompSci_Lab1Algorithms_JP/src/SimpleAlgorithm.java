@@ -11,7 +11,7 @@ public class SimpleAlgorithm {
 	public static void main(String[] args) {
 		@SuppressWarnings("resource")
 		Scanner cin = new Scanner(System.in);
-		int choice = 0, num1 = 0, num2 = 0, exponent = 0, number = 0;
+		int choice = 0, num1 = 0, num2 = 0, exponent = 0, number = 0, digits = 0;
 		double base = 0.0, doublenum = 0;
 		int []res;
 		System.out.println("Welcome to the simple algorithms");
@@ -54,21 +54,10 @@ public class SimpleAlgorithm {
 				System.out.print("Number: ");
 				doublenum = cin.nextDouble();
 			}else if(choice == 5) { // findDigits
-				int size = 0;
 				System.out.print("Number: ");
 				num1 = cin.nextInt();
 				System.out.print("Nth Digit(N = input): ");
-				num2 = cin.nextInt();
-				size = countDigits(num1);
-				if(num2 > size) { // Error
-					System.out.println("Error: The nth digit is bigger than the number of digits in the number entered! Please input something valid: ");
-					System.out.print("Number: ");
-					num1 = cin.nextInt();
-					System.out.print("Nth Digit(N = input): ");
-					num2 = cin.nextInt();
-				}else {
-				//Do Nothing
-				}
+				num2 = cin.nextInt();				
 			}else if(choice < 8){ // Every other
 				System.out.print("Number: ");
 				 number = cin.nextInt();
@@ -90,8 +79,10 @@ public class SimpleAlgorithm {
 		}else if(choice == 3) {
 			System.out.println("GCD of the numbers: " + num1 + " and " + num2 + " is " + GCD(num1, num2));
 		}else if(choice == 4) {
-			if(exponent < 1) { // If the exponent is negative
+			if(exponent < 1 && exponent != 0) { // If the exponent is negative
 			System.out.println("The base of " + base + " raised to " + exponent + " is 1/" + power(base, exponent));	
+			}else if(exponent == 0) {
+			System.out.println("The Base of " + base + " raised to " + exponent + " is " + power(base, exponent));
 			}else {
 			System.out.println("The base of " + base + " raised to " + exponent + " is " + power(base, exponent));
 			}
@@ -106,14 +97,17 @@ public class SimpleAlgorithm {
 				System.out.println("The " + num2 + "st digit from the right of " + num1 + " is " + findDigit(num1, num2));
 			}
 		}else if(choice == 6) { // down Digits
-			/*res = downDigits(number);
+			//Array Output
+			/*res = downDigits(number); 
 			System.out.println("The Digits of " + number + " are:");
 			for(int i = 0; i < res.length; i++) {
 				System.out.println(res[i]);
 			}*/
-			downDigit(number);
+			//Regular Output using Recursion
+			System.out.println("The Digits of " + number + " are:");
+			downDigits(number);
 		}else if(choice == 7) { // Count Digits
-			System.out.println("There are " + countDigits(doublenum) + " digits in " + doublenum);
+			System.out.println("There are " + countDigits(doublenum) + " digit(s) in " + doublenum);
 		}	
 	}while(choice != 8);
 		System.out.println("Thank you for using simple algorithm, good bye!");
@@ -162,7 +156,7 @@ public class SimpleAlgorithm {
 	}
 	
 	//Gets the digits and stores them in an array, then returns the array to be used elsewhere.
-	private static int[] downDigits(int num) { 
+	/*private static int[] downDigit(int num) { 
 		int digit = 0, arraysize = 0;
 		arraysize = countDigits(num);
 		int []downdigits = new int[arraysize];
@@ -172,16 +166,17 @@ public class SimpleAlgorithm {
 			num = num/10;
 		}
 		return downdigits;
-	}
+	}*/
 	
-	private static int downDigit(int num) {
-		int digit = 0;
-		do {
-			digit = num%10;
-			System.out.println(digit);
-			num = num/10;
-		}while(num > 0);
-		return 0;
+	//Recursive Approach to downDigits since I cant use an array :(
+	private static void downDigits(int num) {
+		int digits = num%10;
+		if(num == 0) {
+			return;
+		}else {
+			downDigits(num/10);
+		}
+		System.out.println(digits);
 	}
 		
 	//Will find the nth digit from the right
