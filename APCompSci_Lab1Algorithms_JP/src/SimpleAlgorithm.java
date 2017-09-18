@@ -54,10 +54,21 @@ public class SimpleAlgorithm {
 				System.out.print("Number: ");
 				doublenum = cin.nextDouble();
 			}else if(choice == 5) { // findDigits
+				int size = 0;
 				System.out.print("Number: ");
 				num1 = cin.nextInt();
 				System.out.print("Nth Digit(N = input): ");
 				num2 = cin.nextInt();
+				size = countDigits(num1);
+				if(num2 > size) { // Error
+					System.out.println("Error: The nth digit is bigger than the number of digits in the number entered! Please input something valid: ");
+					System.out.print("Number: ");
+					num1 = cin.nextInt();
+					System.out.print("Nth Digit(N = input): ");
+					num2 = cin.nextInt();
+				}else {
+				//Do Nothing
+				}
 			}else if(choice < 8){ // Every other
 				System.out.print("Number: ");
 				 number = cin.nextInt();
@@ -86,7 +97,7 @@ public class SimpleAlgorithm {
 			}
 		}else if(choice == 5) { // Find Digits
 			if(num2 > 3) {
-			System.out.println("The " + num2 + "nth digit from the right of " + num1 + " is " + findDigit(num1, num2));
+			System.out.println("The " + num2 + "th digit from the right of " + num1 + " is " + findDigit(num1, num2));
 			}else if(num2 == 3) {
 				System.out.println("The " + num2 + "rd digit from the right of " + num1 + " is " + findDigit(num1, num2));
 			}else if(num2 == 2) {
@@ -95,11 +106,12 @@ public class SimpleAlgorithm {
 				System.out.println("The " + num2 + "st digit from the right of " + num1 + " is " + findDigit(num1, num2));
 			}
 		}else if(choice == 6) { // down Digits
-			res = downDigits(number);
+			/*res = downDigits(number);
 			System.out.println("The Digits of " + number + " are:");
 			for(int i = 0; i < res.length; i++) {
 				System.out.println(res[i]);
-			}
+			}*/
+			downDigit(number);
 		}else if(choice == 7) { // Count Digits
 			System.out.println("There are " + countDigits(doublenum) + " digits in " + doublenum);
 		}	
@@ -162,6 +174,16 @@ public class SimpleAlgorithm {
 		return downdigits;
 	}
 	
+	private static int downDigit(int num) {
+		int digit = 0;
+		do {
+			digit = num%10;
+			System.out.println(digit);
+			num = num/10;
+		}while(num > 0);
+		return 0;
+	}
+		
 	//Will find the nth digit from the right
 	private static int findDigit(int num, int n) {
 		int digits = 0;
@@ -173,7 +195,7 @@ public class SimpleAlgorithm {
 	}
 	
 	// Counts number of digits before the decimal point.
-	// numbers inferior to 1 outputs 1.
+	// numbers inferior to 1 output 1.
 	private static int countDigits(double num) { 
 		int digits = 0;
 		do {
