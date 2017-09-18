@@ -9,11 +9,9 @@ import java.util.Scanner;
 
 public class SimpleAlgorithm {
 	public static void main(String[] args) {
-		@SuppressWarnings("resource")
 		Scanner cin = new Scanner(System.in);
-		int choice = 0, num1 = 0, num2 = 0, exponent = 0, number = 0, digits = 0;
+		int choice = 0, num1 = 0, num2 = 0, exponent = 0, number = 0;
 		double base = 0.0, doublenum = 0;
-		int []res;
 		System.out.println("Welcome to the simple algorithms");
 		do {
 			System.out.println("Options: ");
@@ -114,11 +112,16 @@ public class SimpleAlgorithm {
 				System.out.println("There are " + countDigits(doublenum) + " digit(s) in " + doublenum);
 			}	
 		}while(choice != 8);
+		cin.close();
 		System.out.println("Thank you for using simple algorithm, good bye!");
 	}
 
-
-	private static void factors(int num) { // Factors function
+	/**
+	 * Prints in console the factors of num
+	 * @param num the number to get the factors of
+	 * @return Nothing
+	 */
+	private static void factors(int num) { 
 		System.out.print("The Factors of " + num + " are: ");
 		for(int i = 1; i < num; i++) {
 			if(num%i == 0) {
@@ -128,7 +131,11 @@ public class SimpleAlgorithm {
 		System.out.print(num + ".");
 	}
 
-	private static boolean prime(int n) { // Function to check for prime
+	/**Function to check for Primeness
+	 * @param
+	 * n is the number which we will check primeness of
+	 * @return True if Prime, False Otherwise**/
+	private static boolean prime(int n) { 
 		for(int i=2;i<n;i++) 
 		{
 			if(n%i==0)
@@ -136,15 +143,29 @@ public class SimpleAlgorithm {
 		}
 		return true; // Is Prime
 	}
-
-	private static int GCD(int a, int b) { // Using euclid 's method to find GCD
+	
+	/**
+	 * Using Euclid's method we find the GCD(Greatest common divisor)
+	 * @see https://en.wikipedia.org/wiki/Euclidean_algorithm
+	 * @param a first number 
+	 * @param b second number
+	 * @return a if b is 0
+	 */
+	private static int GCD(int a, int b) { 
 		if(b == 0) { // If a is zero, then we set 
 			return a; // If the bottom number is zero then we return 
 		}
 		return GCD(b, a%b); // We return with the function with int a being our previous b value, and int b being the modulus of a%b
 	}
 
-	private static double power(double base, int exponent) { // Power function, cause we can't use .pow() :(
+	
+	/**
+	 * We get our base and put it to the power of the exponent
+	 * @param base our base can be positive, negative or 0
+	 * @param exponent if base is 0 then has to be positive, otherwise can be positive, negative or 0
+	 * @return 1 if exponent is 0
+	 */
+	private static double power(double base, int exponent) {
 		// To calculate the power we first get the power
 		double poweredint = 0;
 
@@ -173,7 +194,10 @@ public class SimpleAlgorithm {
 		return downdigits;
 	}*/
 
-	//Recursive Approach to downDigits since I cant use an array :(
+	/**
+	 * Recursive approach to downDigits which lists all the digits of a given number
+	 * @param num our positive integer which we find the digits of
+	 */
 	private static void downDigits(int num) {
 		int digits = num%10;
 		if(num == 0) {
@@ -184,7 +208,12 @@ public class SimpleAlgorithm {
 		System.out.println(digits);
 	}
 
-	//Will find the nth digit from the right
+	/**
+	 * Finds the nth digit from the right of a given positive or negative integer
+	 * @param num the number which we find the nth digit of
+	 * @param n the nth digit
+	 * @return the digits of the given int
+	 */
 	private static int findDigit(int num, int n) {
 		int digits = 0;
 		if(num < 0) {
@@ -197,8 +226,11 @@ public class SimpleAlgorithm {
 		return digits;
 	}
 
-	// Counts number of digits before the decimal point.
-	// numbers inferior to 1 output 1.
+	/**
+	 * Counts number of digits before the decimal point.
+	 * @param num our input of which we get the number of digits.
+	 * @return Numbers inferior to 1 will return 1, otherwise it will return the number of digits.
+	 */
 	private static int countDigits(double num) { 
 		int digits = 0;
 		if(num < 0) {
