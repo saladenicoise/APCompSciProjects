@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+import java.lang.Math;
 
 /*
  * name: jules petit
@@ -37,6 +38,12 @@ public class StatisitcsPackage {
 		output(numbers, arraysize);
 		System.out.println("Mean of the array:");
 		System.out.println(mean(numbers, arraysize));
+		System.out.println("Median of the array:");
+		System.out.println(median(numbers, arraysize));
+		System.out.println("Range of the array:");
+		System.out.println(range(numbers, arraysize));
+		System.out.println("Standard Deviation of the array:");
+		System.out.println(standarddev(numbers, arraysize));
 		input.close();
 	}
 
@@ -82,31 +89,79 @@ public class StatisitcsPackage {
 	/**
 	 * Calculates the mean of our array
 	 * @param nums the array
-	 * @param size the size
+	 * @param size the size of the array
 	 * @return the mean
 	 */
-	private static int mean(int []nums, int size) {
-		int add = 0;
+	private static double mean(int []nums, int size) {
+		double add = 0;
 		for(int i = 0; i < size; i++) {
 			add = add + nums[i];
 		}
 		return add/size;
 	}
 
-	private static int median(int []nums, int size) {
+	/**
+	 * Calculates the median of our array	
+	 * @param nums the array
+	 * @param size the size of said array
+	 * @return the median
+	 */
+	private static double median(int []nums, int size) {
 		int median = 0;
-		int size2 = 0;
 		double doublemedian = 0;
-		double []doublenums = new double[size];
-		for(int i = 0; i < size; i++) {
-			doublenums[i] = nums[i]; 
-		}
 		if(size%2 == 0) {
-			median = nums[size/2] + nums[(size/2) + 1];
-			median = median/2;
+			doublemedian = nums[size/2] + nums[(size/2) + 1];
+			doublemedian = doublemedian/2;
 		}else {
-			size2 = size/2 + 0.5;
-			doublemedian = doublenums[size2];
+			median = nums[size/2];
+		}
+		if(doublemedian > 0) {
+			return doublemedian;
+		}else {
+			return median;
+		}
+	}
+	/**
+	 * Calculate the range of the array
+	 * @param nums the array
+	 * @param size the size
+	 * @return the range
+	 */
+	private static int range(int []nums, int size) {
+		int range = 0;
+		range = nums[size-1] - nums[0]; 
+		return range;
+	}
+	
+	/**
+	 * Calculates the standard deviation
+	 * @param nums the array
+	 * @param size of said array
+	 * @return the standard deviation
+	 */
+	private static double standarddev(int []nums, int size) {
+		double standarddev = 0, hold = 0, sum = 0;
+		for(int i = 0; i < size; i++) { 
+			hold = nums[i] - mean(nums, size); // (x - xbar)
+			hold = hold * hold; //Square it
+			sum = hold + sum; // Add it
+		}
+		standarddev = sum/(size-1);
+		return Math.sqrt(standarddev);
+	}
+	
+	private static int mode(int []nums, int size) {
+		int count = 0,count2 = 0;
+		for(int i = 0; i < size; i++) {
+			if(nums[i] == nums[i+1]) {
+				if(nums[i+1] == nums[i+2]) {
+					if(count == 0) {
+						
+					}else if(count == 1)
+				}
+				count++;
+				count2 = count;
+			}
 		}
 	}
 
