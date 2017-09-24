@@ -152,27 +152,14 @@ public class StatisitcsPackage {
 		return Math.sqrt(standarddev);
 	}
 
-	private static int[] mode(int []nums, int size) {
-		 int[] counts = new int[size];
-		    for (int i = 0; i < size; i++) {
-		        counts[nums[i]]++;
-		    }
-		    int max = counts[0];
-		    for (int counter = 1; counter < counts.length; counter++) {
-		        if (counts[counter] > max) {
-		            max = counts[counter];
-		        }
-		    }
-
-		    int[] modes = new int[size];
-
-		    int j = 0;
-		    for (int i = 0; i < counts.length; i++) {
-		        if (counts[i] == max)
-		            modes[j++] = nums[i];
-		    }
-		    return modes;
-
+	private static int mode(int []nums, int size) {
+		int counter1 = 0, counter2 = 0, hold1 = 0, hold2 = 0, i = 0;
+		if(nums[i] == nums[i+1]) {
+			hold1 = nums[i];
+			counter1++;
+			i++;
+		}
+		return 0;
 	}
 
 }
