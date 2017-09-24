@@ -44,7 +44,7 @@ public class StatisitcsPackage {
 		System.out.println(range(numbers, arraysize));
 		System.out.println("Standard Deviation of the array:");
 		System.out.println(standarddev(numbers, arraysize));
-		System.out.println("The Mode(s) of the array");
+		System.out.println("Mode(s) of the array:");
 		System.out.println(mode(numbers, arraysize));
 		input.close();
 	}
@@ -153,13 +153,20 @@ public class StatisitcsPackage {
 	}
 
 	private static int mode(int []nums, int size) {
-		int counter1 = 0, counter2 = 0, hold1 = 0, hold2 = 0, i = 0;
-		if(nums[i] == nums[i+1]) {
-			hold1 = nums[i];
-			counter1++;
-			i++;
-		}
-		return 0;
-	}
+		int maxValue = 0, maxCount = 0;
 
+		for (int i = 0; i < size; ++i) {
+			int count = 0;
+			for (int j = 0; j < size; ++j) {
+				if (nums[j] == nums[i])
+					++count;
+			} 
+			if (count > maxCount) 
+			{
+				maxCount = count;
+				maxValue = nums[i];
+			}
+		}
+		return maxValue;
+	}
 }
