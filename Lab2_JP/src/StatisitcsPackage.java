@@ -44,6 +44,8 @@ public class StatisitcsPackage {
 		System.out.println(range(numbers, arraysize));
 		System.out.println("Standard Deviation of the array:");
 		System.out.println(standarddev(numbers, arraysize));
+		System.out.println("The Mode(s) of the array");
+		System.out.println(mode(numbers, arraysize));
 		input.close();
 	}
 
@@ -132,7 +134,7 @@ public class StatisitcsPackage {
 		range = nums[size-1] - nums[0]; 
 		return range;
 	}
-	
+
 	/**
 	 * Calculates the standard deviation
 	 * @param nums the array
@@ -149,20 +151,28 @@ public class StatisitcsPackage {
 		standarddev = sum/(size-1);
 		return Math.sqrt(standarddev);
 	}
-	
-	private static int mode(int []nums, int size) {
-		int count = 0,count2 = 0;
-		for(int i = 0; i < size; i++) {
-			if(nums[i] == nums[i+1]) {
-				if(nums[i+1] == nums[i+2]) {
-					if(count == 0) {
-						
-					}else if(count == 1)
-				}
-				count++;
-				count2 = count;
-			}
-		}
+
+	private static int[] mode(int []nums, int size) {
+		 int[] counts = new int[size];
+		    for (int i = 0; i < size; i++) {
+		        counts[nums[i]]++;
+		    }
+		    int max = counts[0];
+		    for (int counter = 1; counter < counts.length; counter++) {
+		        if (counts[counter] > max) {
+		            max = counts[counter];
+		        }
+		    }
+
+		    int[] modes = new int[size];
+
+		    int j = 0;
+		    for (int i = 0; i < counts.length; i++) {
+		        if (counts[i] == max)
+		            modes[j++] = nums[i];
+		    }
+		    return modes;
+
 	}
 
 }
