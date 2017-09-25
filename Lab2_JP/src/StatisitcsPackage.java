@@ -45,7 +45,7 @@ public class StatisitcsPackage {
 		System.out.println("Standard Deviation of the array:");
 		System.out.println(standarddev(numbers, arraysize));
 		System.out.println("Mode(s) of the array:");
-		System.out.println(mode(numbers, arraysize));
+		mode(numbers, arraysize);
 		input.close();
 	}
 
@@ -152,21 +152,23 @@ public class StatisitcsPackage {
 		return Math.sqrt(standarddev);
 	}
 
-	private static int mode(int []nums, int size) {
-		int maxValue = 0, maxCount = 0;
-
-		for (int i = 0; i < size; ++i) {
+	private static void mode(int []nums, int size) {
+		int maxValue = 0, maxCount = 0, maxValue2 = 0, maxCount2 = 0;
+		for (int a = 0; a < size; ++a) {
 			int count = 0;
 			for (int j = 0; j < size; ++j) {
-				if (nums[j] == nums[i])
-					++count;
+				if (nums[j] == nums[a]) {
+					count++;
+					System.out.println("Count " + count);
+				}
 			} 
 			if (count > maxCount) 
 			{
 				maxCount = count;
-				maxValue = nums[i];
+				System.out.println("Max Count: " + maxCount);
+				maxValue = nums[a];
 			}
 		}
-		return maxValue;
+		System.out.println(maxValue);
 	}
 }
