@@ -161,23 +161,26 @@ public class StatisitcsPackage {
 			for (int j = 0; j < size; ++j) {
 				if (nums[j] == nums[a]) {
 					count++;
-					for(int b = 0; b < freq.length; b++) {
-						if(count > freq[b]) {
-							hold = freq[b];
-							hold2 = freq[b+1];
-						}
-						freq[b] = count;
-						val[b] = nums[a];
-					}
 				}
 			}
-			if (count > maxCount) {
-				maxCount = count;
-				maxValue = nums[a];
+			freq[0] = count;
+			if(freq[0] >= freq[1]) {
+				freq[1] = count;
+				if(freq[1] > freq[2]) {
+					freq[2] = count;
+					val[2] = nums[a];
+					
+				}
+				val[1] = nums[a];
 			}
+			val[0] = nums[a];
 		}
-		for(int c = 0; c < 3; c++) {
-		System.out.println(freq[c] + " " + val[c]);
+		if(freq[0] >= freq[2] || val[1] == val[2]) {
+			System.out.println(val[2]);
+		}else if(freq[1] == freq[2]){
+			System.out.println(val[2] + " " + val[1]);
+		}else if(freq[0] == freq[1] && freq[0] == freq[2]){
+			System.out.println("No Modes");
 		}
 	}
 }
