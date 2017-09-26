@@ -57,7 +57,7 @@ public class StatisitcsPackage {
 	private static void output(int[]nums, int size) {
 		int linecounter = 0;
 		for(int i = 0; i < size; i++) {
-			System.out.print(nums[i] + " ");
+			System.out.printf("%-8d", nums[i]);
 			linecounter++;
 			if(linecounter%10==0) {
 				System.out.print("\n");
@@ -153,22 +153,31 @@ public class StatisitcsPackage {
 	}
 
 	private static void mode(int []nums, int size) {
-		int maxValue = 0, maxCount = 0, maxValue2 = 0, maxCount2 = 0;
+		int maxValue = 0, maxCount = 0, maxValue2 = 0, maxCount2 = 0, looped = 0, count2 = 0, hold= 0, hold2 = 0;
+		int freq[] = new int[3];
+		int val[] = new int[3];
 		for (int a = 0; a < size; ++a) {
 			int count = 0;
 			for (int j = 0; j < size; ++j) {
 				if (nums[j] == nums[a]) {
 					count++;
-					System.out.println("Count " + count);
+					for(int b = 0; b < freq.length; b++) {
+						if(count > freq[b]) {
+							hold = freq[b];
+							hold2 = freq[b+1];
+						}
+						freq[b] = count;
+						val[b] = nums[a];
+					}
 				}
-			} 
-			if (count > maxCount) 
-			{
+			}
+			if (count > maxCount) {
 				maxCount = count;
-				System.out.println("Max Count: " + maxCount);
 				maxValue = nums[a];
 			}
 		}
-		System.out.println(maxValue);
+		for(int c = 0; c < 3; c++) {
+		System.out.println(freq[c] + " " + val[c]);
+		}
 	}
 }
