@@ -15,7 +15,8 @@ public class StatisitcsPackage {
 		String pathname = "src/nums.txt";
 		File file = new File(pathname);
 		Scanner input = null;
-		int arraysize = 0;
+		Scanner in = new Scanner(System.in);
+		int arraysize = 0, choice = 0;
 		try {
 			input = new Scanner(file);
 		}
@@ -36,17 +37,43 @@ public class StatisitcsPackage {
 		System.out.println("Sorted Array:");
 		sort(numbers, arraysize);
 		output(numbers, arraysize);
-		System.out.println("Mean of the array:");
-		System.out.println(mean(numbers, arraysize));
-		System.out.println("Median of the array:");
-		System.out.println(median(numbers, arraysize));
-		System.out.println("Range of the array:");
-		System.out.println(range(numbers, arraysize));
-		System.out.println("Standard Deviation of the array:");
-		System.out.println(standarddev(numbers, arraysize));
-		System.out.println("Mode(s) of the array:");
-		mode(numbers, arraysize);
+		do {
+			System.out.println("Welcome! Please choose your option:");
+			System.out.println("1. Mean");
+			System.out.println("2. Median");
+			System.out.println("3. Range");
+			System.out.println("4. Standard Deviation");
+			System.out.println("5. Mode(s)");
+			System.out.println("6. Print me the array again please");
+			System.out.println("7. Quit");
+			System.out.println("Enter your choice: ");
+			choice = in.nextInt();
+			if(choice == 1) {
+				System.out.println("Mean of the array:");
+				System.out.println(mean(numbers, arraysize));
+			}else if(choice == 2) {
+				System.out.println("Median of the array:");
+				System.out.println(median(numbers, arraysize));
+			}else if(choice == 3) {
+				System.out.println("Range of the array:");
+				System.out.println(range(numbers, arraysize));
+			}else if(choice == 4) {
+				System.out.println("Standard Deviation of the array:");
+				System.out.println(standarddev(numbers, arraysize));
+			}else if(choice == 5) {
+				System.out.println("Mode(s) of the array:");
+				mode(numbers, arraysize);
+			}else if(choice == 6){
+				System.out.println("Sorted Array:");
+				sort(numbers, arraysize);
+				output(numbers, arraysize);
+			}else {
+				System.out.println("Error: Not a valid choice!");
+			}
+		}while(choice != 7);
 		input.close();
+		in.close();
+		System.out.println("Thank you, and goodbye!");
 	}
 
 	/**
@@ -152,8 +179,12 @@ public class StatisitcsPackage {
 		return Math.sqrt(standarddev);
 	}
 
+	/**
+	 * Prints the mode(s)
+	 * @param nums The Array
+	 * @param size The size of the array
+	 */
 	private static void mode(int []nums, int size) {
-		int maxValue = 0, maxCount = 0, maxValue2 = 0, maxCount2 = 0, looped = 0, count2 = 0, hold= 0, hold2 = 0;
 		int freq[] = new int[3];
 		int val[] = new int[3];
 		for (int a = 0; a < size; ++a) {
@@ -169,7 +200,7 @@ public class StatisitcsPackage {
 				if(freq[1] > freq[2]) {
 					freq[2] = count;
 					val[2] = nums[a];
-					
+
 				}
 				val[1] = nums[a];
 			}
