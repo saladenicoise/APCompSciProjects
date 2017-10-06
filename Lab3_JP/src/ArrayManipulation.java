@@ -40,9 +40,9 @@ public class ArrayManipulation {
 					System.out.print("What element would you like to find: ");
 					element = input.nextInt();
 					find(array, element);
-					System.out.print("Another Search(1 = yes/ 0 = no): ");
+					System.out.print("Another Search(0 = yes/ 1 = no): ");
 					choice2 = input.nextInt();
-				}while(choice2 != 0);
+				}while(choice2 != 1);
 			}else if(choice == 3) {
 				System.out.println("Smallest Element First");
 				switchSmallest(array);
@@ -54,9 +54,9 @@ public class ArrayManipulation {
 
 			}
 		}while(choice != 6);
+		for (int i = 0; i < 2; i++)
+			rotate(array, 2);
 		display(array);
-		element = input.nextInt();
-		find(array, element);
 	}
 
 	/**
@@ -76,13 +76,32 @@ public class ArrayManipulation {
 		}
 	}
 
+	/**
+	 * Finds the give element in the array	
+	 * @param array2 the array
+	 * @param element the given element to find
+	 */
+
 	public static void find(int[]array2, int element) {
+		boolean found = false;
+		int pos = 0;
 		for(int a = 0; a < array2.length; a++) {
 			if(array2[a] == element) {
-				System.out.println("Entry of " + element + " found at position: " + a);
+				found = true;
+				pos = a;
 			}
 		}
+		if(found == true) {
+			System.out.println("Entry of " + element + " found at position: " + pos);
+		}else{
+			System.out.println("Entry of " + element + " not found");
+		}	
 	}
+
+	/**
+	 * Switches the smallest with the first
+	 * @param array2
+	 */
 
 	public static void switchSmallest(int []array2) {
 		int smallest = array2[0], hold = 0;
@@ -96,6 +115,36 @@ public class ArrayManipulation {
 		array2[0] = smallest;
 		display(array2);
 	}
-	
+
+	public static void rotate(int []array2, int direction) {
+		int temp = array2[0];
+		int count = 0, i;
+		if(direction > 0) { // Forwards
+			for(i = 0; i < array2.length-1; i++) {
+				array2[i] = array2[i+1];
+			}
+			array2[i] = temp;
+			count++;
+		}else{ // backwards
+
+		}
+	}
+
+	void leftRotate(int arr[], int d, int n) 
+	{
+		int i;
+		for (i = 0; i < d; i++)
+			leftRotatebyOne(arr, n);
+	}
+
+	void leftRotatebyOne(int arr[], int n) 
+	{
+		int i, temp;
+		temp = arr[0];
+		for (i = 0; i < n - 1; i++)
+			arr[i] = arr[i + 1];
+		arr[i] = temp;
+	}
+
 
 }
