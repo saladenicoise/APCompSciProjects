@@ -47,16 +47,25 @@ public class ArrayManipulation {
 				System.out.println("Smallest Element First");
 				switchSmallest(array);
 			}else if(choice == 4) {
-
+				System.out.print("How Many Steps: ");
+				choice2 = input.nextInt();
+				if(choice2 > 0) {
+					for(int b = 0; b < choice2; b++) {
+						rotate(array, choice2);
+					}
+				}else {
+					choice2 = -choice2;
+					for(int b = 0; b < choice2; b++) {
+						rotate(array, choice2);
+					}
+				}
+				display(array);
 			}else if(choice == 5) {
 
 			}else {
 
 			}
 		}while(choice != 6);
-		for (int i = 0; i > -2; i++)
-			rotate(array, -2);
-		display(array);
 	}
 
 	/**
@@ -125,10 +134,12 @@ public class ArrayManipulation {
 			}
 			array2[i] = temp;
 		}else{ // backwards
-			for(i = array2.length-1; i > 0; i--) {
-				array2[i-1] = array2[i];
+			for(int b = 0; b < array2.length / 2; b++)
+			{
+			    int temp1 = array2[b];
+			    array2[b] = array2[array2.length - b - 1];
+			    array2[array2.length - b - 1] = temp1;
 			}
-			array2[i] = temp;
 		}
 	}
 
