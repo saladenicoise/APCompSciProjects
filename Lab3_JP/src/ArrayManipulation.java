@@ -54,8 +54,8 @@ public class ArrayManipulation {
 
 			}
 		}while(choice != 6);
-		for (int i = 0; i < 2; i++)
-			rotate(array, 2);
+		for (int i = 0; i > -2; i++)
+			rotate(array, -2);
 		display(array);
 	}
 
@@ -124,9 +124,11 @@ public class ArrayManipulation {
 				array2[i] = array2[i+1];
 			}
 			array2[i] = temp;
-			count++;
 		}else{ // backwards
-
+			for(i = array2.length-1; i > 0; i--) {
+				array2[i-1] = array2[i];
+			}
+			array2[i] = temp;
 		}
 	}
 
