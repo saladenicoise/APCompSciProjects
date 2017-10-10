@@ -47,23 +47,15 @@ public class ArrayManipulation {
 				System.out.println("Smallest Element First");
 				switchSmallest(array);
 			}else if(choice == 4) {
-				System.out.print("How Many Steps: ");
+				System.out.print("How many steps?: ");
 				choice2 = input.nextInt();
-				if(choice2 > 0) {
-					for(int b = 0; b < choice2; b++) {
-						rotate(array, choice2);
-					}
-				}else {
-					choice2 = -choice2;
-					for(int b = 0; b < choice2; b++) {
-						rotate(array, choice2);
-					}
-				}
+				rotate(array, choice2);
 				display(array);
 			}else if(choice == 5) {
-
+				System.out.println("Deleting Zerores!");
+				deleteMeZeroes(array);
 			}else {
-
+				System.out.println("Invalid choice!");
 			}
 		}while(choice != 6);
 	}
@@ -125,38 +117,54 @@ public class ArrayManipulation {
 		display(array2);
 	}
 
+	/**
+	 * Rotates the array either backwards or forwards
+	 * @param array2 the array
+	 * @param direction the direction in which we rotate
+	 */
+
 	public static void rotate(int []array2, int direction) {
-		int temp = array2[0];
 		int count = 0, i;
 		if(direction > 0) { // Forwards
-			for(i = 0; i < array2.length-1; i++) {
-				array2[i] = array2[i+1];
+			for(int b = 0; b < direction; b++) {
+				int temp = array2[array2.length-1];
+				for(i = array2.length-1; i > 0; i--) {
+					array2[i] = array2[i - 1];
+				}
+				array2[0] = temp;
 			}
-			array2[i] = temp;
 		}else{ // backwards
-			for(int b = 0; b < array2.length / 2; b++)
-			{
-			    int temp1 = array2[b];
-			    array2[b] = array2[array2.length - b - 1];
-			    array2[array2.length - b - 1] = temp1;
+			direction = array2.length-(-direction);
+			for(int b = 0; b < direction; b++) {
+				int temp = array2[array2.length-1];
+				for(i = array2.length-1; i > 0; i--) {
+					array2[i] = array2[i - 1];
+				}
+				array2[0] = temp;
 			}
 		}
 	}
 
-	void leftRotate(int arr[], int d, int n) 
-	{
-		int i;
-		for (i = 0; i < d; i++)
-			leftRotatebyOne(arr, n);
-	}
-
-	void leftRotatebyOne(int arr[], int n) 
-	{
-		int i, temp;
-		temp = arr[0];
-		for (i = 0; i < n - 1; i++)
-			arr[i] = arr[i + 1];
-		arr[i] = temp;
+	public static void deleteMeZeroes(int array2[]) {
+		int count = 0;
+		for(int i = 0; i < array2.length; i++) {
+			if (array2[i] == 0) {
+				count++;
+			}
+		}
+		if(count == 0) {
+			System.out.println("No zeroes were found! Aborting deletion!");
+		}else {
+			int array3[] = new int[array2.length-count];
+			for(int b = 0; b < array3.length; b++) {
+				if(array2[b] == 0) {		
+					array3[b] = array2[b+1];
+				}else {
+					array3[b] = array2[b];
+				}
+			}
+			display(array3);
+		}
 	}
 
 
