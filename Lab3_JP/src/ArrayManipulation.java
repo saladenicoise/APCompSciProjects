@@ -47,17 +47,25 @@ public class ArrayManipulation {
 				System.out.println("Smallest Element First");
 				switchSmallest(array);
 			}else if(choice == 4) {
+				do {
 				System.out.print("How many steps?: ");
 				choice2 = input.nextInt();
 				rotate(array, choice2);
 				display(array);
+				System.out.println("");
+				System.out.print("Another Search(0 = yes/ 1 = no): ");
+				choice2 = input.nextInt();
+			}while(choice2 != 1);
 			}else if(choice == 5) {
 				System.out.println("Deleting Zerores!");
-				deleteMeZeroes(array);
+				array = deleteMeZeroes(array);
+				display(array);
+			}else if(choice == 6){
 			}else {
 				System.out.println("Invalid choice!");
 			}
 		}while(choice != 6);
+		System.out.println("Thank you for using me!");
 	}
 
 	/**
@@ -124,7 +132,7 @@ public class ArrayManipulation {
 	 */
 
 	public static void rotate(int []array2, int direction) {
-		int count = 0, i;
+		int i;
 		if(direction > 0) { // Forwards
 			for(int b = 0; b < direction; b++) {
 				int temp = array2[array2.length-1];
@@ -134,7 +142,8 @@ public class ArrayManipulation {
 				array2[0] = temp;
 			}
 		}else{ // backwards
-			direction = array2.length-(-direction);
+			direction = direction%array2.length;
+			direction = array2.length - (direction * -1);
 			for(int b = 0; b < direction; b++) {
 				int temp = array2[array2.length-1];
 				for(i = array2.length-1; i > 0; i--) {
@@ -145,26 +154,30 @@ public class ArrayManipulation {
 		}
 	}
 
-	public static void deleteMeZeroes(int array2[]) {
+	/**
+	 * Deletes the zeroes of an array!
+	 * @param array2 the array
+	 * @return the new array to be used
+	 */
+	
+	public static int[] deleteMeZeroes(int array2[]) {
 		int count = 0;
 		for(int i = 0; i < array2.length; i++) {
 			if (array2[i] == 0) {
 				count++;
 			}
 		}
-		if(count == 0) {
-			System.out.println("No zeroes were found! Aborting deletion!");
-		}else {
-			int array3[] = new int[array2.length-count];
-			for(int b = 0; b < array3.length; b++) {
-				if(array2[b] == 0) {		
-					array3[b] = array2[b+1];
-				}else {
-					array3[b] = array2[b];
+		int array3[] = new int[array2.length-count];
+		if(count != 0) {
+			int c = 0;
+			for(int b = 0; b < array2.length; b++) {
+				if(array2[b] != 0) {		
+					array3[c] = array2[b];
+					c++;
 				}
 			}
-			display(array3);
 		}
+		return array3;
 	}
 
 
