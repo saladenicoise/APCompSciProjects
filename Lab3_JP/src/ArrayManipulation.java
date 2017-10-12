@@ -2,6 +2,13 @@ import java.util.*;
 
 public class ArrayManipulation {
 
+	/*
+	 * Name: Jules Petit
+	 * Block: E-Block
+	 * Version: 1.1.0
+	 */
+	
+	
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		int size = 0, object = 0, element = 0, choice = 0, choice2 = 0;
