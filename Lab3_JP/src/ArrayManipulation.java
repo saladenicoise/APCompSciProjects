@@ -2,6 +2,13 @@ import java.util.*;
 
 public class ArrayManipulation {
 
+	/*
+	 * Name: Jules Petit
+	 * Block: E-Block
+	 * Version: 1.1.0
+	 */
+	
+	
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		int size = 0, object = 0, element = 0, choice = 0, choice2 = 0;
@@ -34,6 +41,7 @@ public class ArrayManipulation {
 			System.out.print("Choice: ");
 			choice = input.nextInt();
 			if(choice == 1) {
+				System.out.println("Array Size: " + array.length);
 				display(array);
 			}else if(choice == 2) {
 				do {
@@ -59,6 +67,7 @@ public class ArrayManipulation {
 			}else if(choice == 5) {
 				System.out.println("Deleting Zerores!");
 				array = deleteMeZeroes(array);
+				System.out.println("Array Size: " + array.length);
 				display(array);
 			}else if(choice == 6){
 			}else {
@@ -76,12 +85,12 @@ public class ArrayManipulation {
 	public static void display(int[]array2) {
 		System.out.print("Array Positions: ");
 		for(int a = 0; a < array2.length; a++) {
-			System.out.printf("%-8d", a);
+			System.out.printf("%-5d", a);
 		}
 		System.out.print("\n");
 		System.out.print("Array Entries:   ");
 		for(int b = 0; b < array2.length; b++) {
-			System.out.printf("%-8d", array2[b]);
+			System.out.printf("%-5d", array2[b]);
 		}
 	}
 
