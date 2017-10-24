@@ -54,22 +54,17 @@ public class MiddleEarthBase {
 	public static int multiply(int num1, int num2, int base) {
 		//Finds the number of digits to see how many times to repeat
 		//For each digit of number 2 multiply by each digit of number 1, loops inside of loops.
-		int num1digit = 0, num2digit = 0, sum = 0, tens = 1, sumdigit = 0, digitcounter = 0, digithold = 0, carry = 0, result = 0, tens1 = 1;
+		int num1hold = 0, num1digit = 0, num2digit = 0, sum = 0, tens = 1, sum2 = 0, digitcounter = 0, digithold = 0, carry = 0, result = 0, tens1 = 1, digits = 0;
 		do {
-			num2digit = (num2/tens) % 10;
+			num2digit = (num2/tens1) % 10;
+			for(int i = 0; i < 4; i++) {
+				sum = num2digit * ((num1/tens) % 10);
+				System.out.println(sum);
+				tens *= 10;
+			}
 			digitcounter++;
-			sum = num2digit * num1 + sum;
-			tens = tens * 10;
-			do {
-				sumdigit = (sum/tens1) % 10;
-				if(sumdigit > base) {
-					digithold = sumdigit%base;
-					carry = 1;
-				}
-				result = digithold + (carry * 10 * (int) Math.pow(10, digitcounter)) + result;
-				tens1 = tens1 * 10;
-			}while(sumdigit != 0);
-		}while(digitcounter != 4);
+			tens1 *= 10;
+		}while(digitcounter <= 4);
 		return sum;
 	}	
 
