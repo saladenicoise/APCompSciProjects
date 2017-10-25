@@ -3,6 +3,13 @@ import java.math.*;
 
 
 public class MiddleEarthBase {
+	/*
+	 * Name: Jules Petit
+	 * Block: E
+	 * Date: 10/25/17
+	 * Version: 1
+	 */
+	
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		int loop = 0;
@@ -52,7 +59,7 @@ public class MiddleEarthBase {
 				System.out.println("Not a valid race, valid choices are: human, Human, Elves, elves, dwarf, Dwarf, Wizard, wizard");
 			}
 			loop++;
-		}while(loop != 10);
+		}while(loop <= 10);
 
 	}
 
@@ -94,7 +101,7 @@ public class MiddleEarthBase {
 				digits2++;
 			}
 		}while(num2hold >= 1 || num1hold >= 1);
-		do {
+		while(digitcounter2 < digits1 || digitcounter2 < digits2) {
 			tens1 = 1;
 			num2digit = (num2/tens) % 10;
 			digitcounter = 0;
@@ -135,7 +142,7 @@ public class MiddleEarthBase {
 				sum4 = (sumdigit * (int) Math.pow(10, digitcounter3)) + (carry * (int) Math.pow(10, digitcounter3+1)) + sum4;
 				tens2 *= 10;
 				digitcounter3++;
-			}while(digitcounter3 <= digits);
+			}while(digitcounter3 < digits);
 			result = sum4 + result;
 			resulthold = result;
 			sum7 = 0;
@@ -156,18 +163,14 @@ public class MiddleEarthBase {
 				sum7 = (result1digit * (int) Math.pow(10, digitcounter7)) + (carry * (int) Math.pow(10, digitcounter7+1)) + sum7;
 				tens7 *= 10;
 				digitcounter7++;
-			}while(digitcounter7 <= digits7);
+			}while(digitcounter7 < digits7);
 			//end of loop
 			//new result is sum7
 			result = sum7;
 			sumhold = sum4;
-			if(sumhold != 0 && base != 2) { //Special case for binary since we want to see 0 in intermediate step but no 0 at the end of the others.
-				System.out.println(sumhold/important);
-			}else {
-				System.out.println(sumhold/important);
-			}
+			System.out.println(sumhold/important);
 			important *= 10;
-		}while(digitcounter2 <= digits1);
+		}
 		sum4hold = result;
 		do {
 			sum4hold = sum4hold/10;
@@ -183,7 +186,7 @@ public class MiddleEarthBase {
 			sum5 = (resultdigit * (int) Math.pow(10, digitcounter4)) + (carry * (int) Math.pow(10, digitcounter4+1)) + sum5;
 			tens3 *= 10;
 			digitcounter4++;
-		}while(digitcounter4 <= digits3);
+		}while(digitcounter4 < digits3);
 		System.out.println("====");
 		return sum5;
 	}
