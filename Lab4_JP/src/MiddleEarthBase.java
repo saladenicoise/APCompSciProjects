@@ -5,51 +5,54 @@ import java.math.*;
 public class MiddleEarthBase {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
-		System.out.print("What Race: ");
-		String race = input.nextLine();
-		System.out.println(race);
-		System.out.print("Number 1: ");
-		int num1 = input.nextInt();
-		System.out.print("Number 2: ");
-		int num2 = input.nextInt();
-		input.nextLine(); // Code to allow for operation input
-		System.out.print("What Operation(+ or *): ");
-		String op = input.nextLine();
-		if(race.equals("wizard") || race.equals("Wizard")) {
-			if(op.equals("+")) {
-				System.out.println(add(num1, num2, 2));
-			}else if(op.equals("*")) {
-				System.out.println(multiply(num1, num2, 2));
+		int loop = 0;
+		do {
+			System.out.print("What Race: ");
+			String race = input.nextLine();
+			System.out.print("Number 1: ");
+			int num1 = input.nextInt();
+			System.out.print("Number 2: ");
+			int num2 = input.nextInt();
+			input.nextLine(); // Code to allow for operation input
+			System.out.print("What Operation(+ or *): ");
+			String op = input.nextLine();
+			if(race.equals("wizard") || race.equals("Wizard")) {
+				if(op.equals("+")) {
+					System.out.println(add(num1, num2, 2));
+				}else if(op.equals("*")) {
+					System.out.println(multiply(num1, num2, 2));
+				}else {
+					System.out.println("Not a valid operation, valid operations are: * or +");
+				}
+			}else if(race.equals("dwarf") || race.equals("Dwarf")) {
+				if(op.equals("+")) {
+					System.out.println(add(num1, num2, 5));
+				}else if(op.equals("*")) {
+					System.out.println(multiply(num1, num2, 5));
+				}else {
+					System.out.println("Not a valid operation, valid operations are: * or +");
+				}
+			}else if(race.equals("elf") || race.equals("Elf")) {
+				if(op.equals("+")) {
+					System.out.println(add(num1, num2, 8));
+				}else if(op.equals("*")) {
+					System.out.println(multiply(num1, num2, 8));
+				}else {
+					System.out.println("Not a valid operation, valid operations are: * or +");
+				}
+			}else if(race.equals("human") || race.equals("Human")) {
+				if(op.equals("+")) {
+					System.out.println(add(num1, num2, 10));
+				}else if(op.equals("*")) {
+					System.out.println(multiply(num1, num2, 10));
+				}else {
+					System.out.println("Not a valid operation, valid operations are: * or +");
+				}
 			}else {
-				System.out.println("Not a valid operation, valid operations are: * or +");
+				System.out.println("Not a valid race, valid choices are: human, Human, Elves, elves, dwarf, Dwarf, Wizard, wizard");
 			}
-		}else if(race.equals("dwarf") || race.equals("Dwarf")) {
-			if(op.equals("+")) {
-				System.out.println(add(num1, num2, 5));
-			}else if(op.equals("*")) {
-				System.out.println(multiply(num1, num2, 5));
-			}else {
-				System.out.println("Not a valid operation, valid operations are: * or +");
-			}
-		}else if(race.equals("elf") || race.equals("Elf")) {
-			if(op.equals("+")) {
-				System.out.println(add(num1, num2, 8));
-			}else if(op.equals("*")) {
-				System.out.println(multiply(num1, num2, 8));
-			}else {
-				System.out.println("Not a valid operation, valid operations are: * or +");
-			}
-		}else if(race.equals("human") || race.equals("Human")) {
-			if(op.equals("+")) {
-				System.out.println(add(num1, num2, 10));
-			}else if(op.equals("*")) {
-				System.out.println(multiply(num1, num2, 10));
-			}else {
-				System.out.println("Not a valid operation, valid operations are: * or +");
-			}
-		}else {
-			System.out.println("Not a valid race, valid choices are: human, Human, Elves, elves, dwarf, Dwarf, Wizard, wizard");
-		}
+			loop++;
+		}while(loop != 10);
 
 	}
 
@@ -80,7 +83,7 @@ public class MiddleEarthBase {
 	public static int multiply(int num1, int num2, int base) {
 		//Finds the number of digits to see how many times to repeat
 		//For each digit of number 2 multiply by each digit of number 1, loops inside of loops.
-		int digitcounter2 = 0, num2digit = 0, tens = 1, sum = 0, sum2 = 0, digitcounter = 0, important = 1, tens1 = 1, sum3 = 0, sumhold = 0, digits = 0, digitcounter3 = 0, sumdigit = 0, tens2 = 1, carry = 0, result = 0, num1hold = num1, num2hold = num2, digits1 = 0, digits2= 0, sum3hold = 0, sum4 = 0, sum4hold, digits3 = 0, sum5 = 0, resultdigit = 0, tens3 = 1, digitcounter4 = 0;
+		int digitcounter2 = 0, num2digit = 0, tens = 1, sum = 0, sum2 = 0, digitcounter = 0, important = 1, tens1 = 1, sum3 = 0, sumhold = 0, digits = 0, digitcounter3 = 0, sumdigit = 0, tens2 = 1, carry = 0, result = 0, num1hold = num1, num2hold = num2, digits1 = 0, digits2= 0, sum3hold = 0, sum4 = 0, sum4hold, digits3 = 0, sum5 = 0, resultdigit = 0, tens3 = 1, digitcounter4 = 0, resulthold = 0, digits7 = 0, result1digit = 0, tens7 = 1, sum7 = 0, digitcounter7 = 0;
 		do {
 			if(num1hold >= 1) {
 				num1hold = num1hold/10;
@@ -100,6 +103,7 @@ public class MiddleEarthBase {
 			digits = 0;
 			tens2 = 1;
 			digitcounter3 = 0;
+			tens7 = 1;
 			do {
 				carry = 0;
 				sum = num2digit * ((num1/tens1) % 10);
@@ -133,12 +137,38 @@ public class MiddleEarthBase {
 				digitcounter3++;
 			}while(digitcounter3 <= digits);
 			result = sum4 + result;
+			resulthold = result;
+			sum7 = 0;
+			digits7 = 0;
+			digitcounter7 = 0;
+			//secondary loop to take care of carry in intermediate sum
+			do {
+				resulthold = resulthold/10;
+				digits7++;
+			}while(resulthold >= 1);
+			do {
+				result1digit = (result/tens7) % 10;
+				carry = 0;
+				if(result1digit >= base) {
+					carry = result1digit/base;
+					result1digit = result1digit%base;
+				}
+				sum7 = (result1digit * (int) Math.pow(10, digitcounter7)) + (carry * (int) Math.pow(10, digitcounter7+1)) + sum7;
+				tens7 *= 10;
+				digitcounter7++;
+			}while(digitcounter7 <= digits7);
+			//end of loop
+			//new result is sum7
+			result = sum7;
 			sumhold = sum4;
-			System.out.println(sumhold);
+			if(sumhold != 0 && base != 2) { //Special case for binary since we want to see 0 in intermediate step but no 0 at the end of the others.
+				System.out.println(sumhold/important);
+			}else {
+				System.out.println(sumhold/important);
+			}
 			important *= 10;
 		}while(digitcounter2 <= digits1);
 		sum4hold = result;
-		System.out.println("Answer Before Conversion: " + result);
 		do {
 			sum4hold = sum4hold/10;
 			digits3++;
