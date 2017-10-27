@@ -56,7 +56,7 @@ public class MiddleEarthBase {
 					System.out.println("Not a valid operation, valid operations are: * or +");
 				}
 			}else {
-				System.out.println("Not a valid race, valid choices are: human, Human, Elves, elves, dwarf, Dwarf, Wizard, wizard");
+				System.out.println("Not a valid race, valid choices are: human, Human, Elf, elf, dwarf, Dwarf, Wizard, wizard");
 			}
 			loop++;
 		}while(loop <= 10);
