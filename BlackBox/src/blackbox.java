@@ -6,10 +6,11 @@ public class blackbox {
 	public static void main(String[] args) {
 		char [][] board = setup(); // Row, Col
 		Scanner input = new Scanner(System.in);
-		int choice = 0;
+		int choice = 0, cguess = 0, iguess = 0, shots = 0;
 		do {
 			System.out.println("Welcome!");
 			display(board);
+			System.out.println("Correct Guesses: " + cguess + " Incorrect Guesses: " + iguess + " Shots Fired: " + shots);
 			System.out.println("Choose:");
 			System.out.println("(1) Shoot a Laser");
 			System.out.println("(2) Guess at mirror location");
@@ -17,11 +18,18 @@ public class blackbox {
 			System.out.print("\nEnter Choice: ");
 			choice = input.nextInt();
 			if(choice == 1) {
-				//Shoot
+				System.out.print("Enter where you want to shoot from: ");
+				int num1 = input.nextInt();
+				//shoot(num1, board, 0);
+				shots++;
 			}else if(choice == 2){ // Guess
-				guess(board);
+				if(guess(board)) {
+					cguess++;
+				}else {
+					iguess++;
+				}
 			}else {
-				//Nope
+				System.out.println("Not a valid input.");
 			}
 		}while(choice != 0);
 		input.close();
@@ -64,7 +72,7 @@ public class blackbox {
 				}else if(boards == 3) { // Forwards slash
 					System.out.print("\\ ");
 				}else {
-					System.out.print(" " + boards);
+					System.out.print(" " + boards); // Position of mirror to cheat
 				}
 			}
 			System.out.print(" " + b + "\n"); // Right Numbers
@@ -82,7 +90,6 @@ public class blackbox {
 			a = a - 30;
 		}else {
 			System.out.println("Unfortunately that is not a correct input");
-			//correct = false; 
 		}
 		System.out.print("Please enter which coordinate(top/bottom) to check for: ");
 		int b = in.nextInt();
@@ -92,23 +99,23 @@ public class blackbox {
 			b = (b+1) - 1;
 		}else {
 			System.out.println("Unfortunately that is not a correct input");
-			//correct = false;
 		}
 		if(board[a][b] == '0') { // Backwards
 			board[a][b] = (char) 2;
 			System.out.println("That is correct! Mirror will now appear! MAGIC");
+			return true;
 		}else if(board[a][b] == '1') { // Forwards
 			board[a][b] = (char) 3;
 			System.out.println("That is correct! Mirror will now appear! MAGIC");
+			return true;
 		}else {
 			System.out.println("I'm sorry, that is incorrect!");
+			return false;
 		}
 	}
 
-	public static void stats(int condition) {
-	}
 
-	/*	public static int shoot(int num1, char[][]board) {
+		/*public static int shoot(int num1, char[][]board, int b) {
 		if(num1 < 20) { // Left and bottom input
 			if(num1 < 10) { // Bottom Input
 
