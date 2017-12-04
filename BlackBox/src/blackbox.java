@@ -21,15 +21,16 @@ public class blackbox {
 				System.out.print("Enter where you want to shoot from: ");
 				int num = input.nextInt();
 				if(num < 10) { // Bottom
-					shoot(num, board, 0, num);
+					shoot(num, board, 0, num, false, false);
 				}else if(num < 20) { //Left
 					int num1 = (-num + 19);
-					shoot(num, board, num1, 0);
+					shoot(num, board, num1-1, 0, false, false);
 				}else if(num < 30) { // Top
-					int num1 = num1 - 20;
-					shoot(num, board, 9, num1);
+					int num1 = num - 20;
+					shoot(num, board, 9, num1, false, false);
 				}else if(num < 40) { // Right
-
+					int num1 = num - 30;
+					shoot(num, board, num1-1, 9, false, false);
 				}else {
 					//Nope
 				}
@@ -127,7 +128,7 @@ public class blackbox {
 	}
 
 
-	public static int shoot(int num1, char[][]board, int row, int col) {
+	public static int shoot(int num1, char[][]board, int row, int col, boolean forwards, boolean backwards) {
 		System.out.println("In function");
 		if(num1 < 20) { // Left and bottom input
 			System.out.println("Left or Bottom");
@@ -136,14 +137,25 @@ public class blackbox {
 				if(col > board.length || row > board.length) {
 					System.out.println("The Shot ended up at: " + (row) + " " + (col));
 				}else {
-					shoot(num1, board, row + 1, col);
+					if(backwards) { // As long as there is a backwards slash it should go to the left
+						shoot(num1, board, row, col+1, false, true);
+					}else if(forwards) { // Forward slash, therefore col to the right(col-1)
+						shoot(num1, board, row, col-1, true, false);
+					}
+					if(board[row][col] == '0') {//Backwards slash //
+						shoot(num1, board, row, col+1, false, true); // Needs to keep increasing col
+					}else if(board[row][col] == '1') { // Forwards slash \\
+						shoot(num1, board, row, col+1, true, false);
+					}else {
+						shoot(num1, board, row + 1, col, false, false);
+					}
 				}
 			}else { // Left Input
 				System.out.println("Left"); // Row stays the same
 				if(col > board.length || row > board.length) {
-					System.out.println("The Shot ended up at: " + (row) + " " + (col));
+					System.out.println("The Shot ended up at: " + (row) + " " + (col-1));
 				}else {
-					shoot(num1, board, row, col + 1);
+					shoot(num1, board, row, col + 1, false, false);
 				}
 			}
 		}else { // Right and top input
