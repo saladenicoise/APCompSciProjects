@@ -19,8 +19,20 @@ public class blackbox {
 			choice = input.nextInt();
 			if(choice == 1) {
 				System.out.print("Enter where you want to shoot from: ");
-				int num1 = input.nextInt();
-				//shoot(num1, board, 0);
+				int num = input.nextInt();
+				if(num < 10) { // Bottom
+					shoot(num, board, 0, num);
+				}else if(num < 20) { //Left
+					int num1 = (-num + 19);
+					shoot(num, board, num1, 0);
+				}else if(num < 30) { // Top
+					int num1 = num1 - 20;
+					shoot(num, board, 9, num1);
+				}else if(num < 40) { // Right
+
+				}else {
+					//Nope
+				}
 				shots++;
 			}else if(choice == 2){ // Guess
 				if(guess(board)) {
@@ -115,20 +127,33 @@ public class blackbox {
 	}
 
 
-		/*public static int shoot(int num1, char[][]board, int b) {
+	public static int shoot(int num1, char[][]board, int row, int col) {
+		System.out.println("In function");
 		if(num1 < 20) { // Left and bottom input
+			System.out.println("Left or Bottom");
 			if(num1 < 10) { // Bottom Input
-
+				System.out.println("Bottom"); // Col stays the same.
+				if(col > board.length || row > board.length) {
+					System.out.println("The Shot ended up at: " + (row) + " " + (col));
+				}else {
+					shoot(num1, board, row + 1, col);
+				}
 			}else { // Left Input
-
+				System.out.println("Left"); // Row stays the same
+				if(col > board.length || row > board.length) {
+					System.out.println("The Shot ended up at: " + (row) + " " + (col));
+				}else {
+					shoot(num1, board, row, col + 1);
+				}
 			}
 		}else { // Right and top input
-			if(num1 < 30 ) { // Top Input
+			if(num1 < 30) { // Top Input
 
 			}else { // Right Input
 
 			}
 		}
-	}*/
+		return -1;
+	}
 
 }
