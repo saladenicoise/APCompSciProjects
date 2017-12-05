@@ -12,8 +12,8 @@ public class blackbox {
 	public static void main(String[] args) {
 		char [][] board = setup(); // Row, Col
 		Scanner input = new Scanner(System.in);
-		int choice = 0, cguess = 0, iguess = 0, shots = 0;
-		//display(board, true); // Debug function to display mirror locations
+		int choice = 0, cguess = 0, iguess = 0, shots = 0, num1 = 0;
+		display(board, true); // Debug function to display mirror locations
 		do {
 			System.out.println("Welcome!");
 			display(board, false);
@@ -30,13 +30,13 @@ public class blackbox {
 				if(num < 10) { // Bottom
 					shoot('T', board, 0, num);
 				}else if(num < 20) { //Left
-					int num1 = (-num + 19);
-					shoot('R', board, num1, 9);
+					num1 = num - 10;
+					shoot('R', board, num1, 9); // row, col
 				}else if(num < 30) { // Top
-					int num1 = num - 20;
+					num1 = num - 20;
 					shoot('B', board, 0, num1);
 				}else if(num < 40) { // Right
-					int num1 = (-num + 39);
+					num1 = num - 30;
 					shoot('L', board, num1, 9);
 				}else {
 					//Nope
@@ -84,9 +84,9 @@ public class blackbox {
 		}
 		return board; // Return the board with all the hidden mirror
 	}
-	/*public static void display(char [][] board) { //Uncomment function to activate debug mode for very first display call(Debug will output all mirror locations as 0 = / and 1 = \).
+	public static void display(char [][] board) { //Uncomment function to activate debug mode for very first display call(Debug will output all mirror locations as 0 = / and 1 = \).
 		display(board, false);
-	}*/
+	}
 	/**
 	 * Displays our array with mirrors hidden
 	 * @param board the array with the mirrors and periods
@@ -168,8 +168,9 @@ public class blackbox {
 				System.out.println(col + 20); //Top Numbers(20-29)
 			}else if(col < 0) {
 				System.out.println(row + 10); // Left Numbers(10-19)
-			}else {
+			}else if(col >= 10){
 				System.out.println(row + 30); // Right Numbers(30-39)
+			}else {
 			}
 			return;
 		}
@@ -239,10 +240,11 @@ public class blackbox {
 		default:
 			//Default switch does nothing.
 		}
+		
 		// Recurse to continue in the new direction
 		switch(direction) {
 		case 'T':
-			shoot(direction, board, row+1, col);
+			shoot(direction, board, row+1, col);		
 			break;
 		case 'B':
 			shoot(direction, board, row-1, col);
