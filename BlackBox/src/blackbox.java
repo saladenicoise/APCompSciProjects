@@ -15,6 +15,10 @@ public class blackbox {
 		int choice = 0, cguess = 0, iguess = 0, shots = 0, num1 = 0;
 		display(board, true); // Debug function to display mirror locations
 		do {
+			if(cguess == 10) {
+				System.out.println("Congratulations! You have found all the mirrors, you have won the day!");
+				System.exit(0);
+			}
 			System.out.println("Welcome!");
 			display(board, false);
 			System.out.println("Correct Guesses: " + cguess + " Incorrect Guesses: " + iguess + " Shots Fired: " + shots);
@@ -31,15 +35,15 @@ public class blackbox {
 					shoot('T', board, 0, num);
 				}else if(num < 20) { //Left
 					num1 = num - 10;
-					shoot('R', board, num1, 9); // row, col
+					shoot('R', board, num1, 0); // row, col
 				}else if(num < 30) { // Top
 					num1 = num - 20;
-					shoot('B', board, 0, num1);
+					shoot('B', board, 9, num1);
 				}else if(num < 40) { // Right
 					num1 = num - 30;
 					shoot('L', board, num1, 9);
 				}else {
-					//Nope
+					System.out.println("Incorrect Input!");
 				}
 				shots++;
 			}else if(choice == 2){ // Guess
@@ -240,7 +244,7 @@ public class blackbox {
 		default:
 			//Default switch does nothing.
 		}
-		
+		//board[row][col] = '*'; <-- Uncomment to get trail of laser.
 		// Recurse to continue in the new direction
 		switch(direction) {
 		case 'T':
