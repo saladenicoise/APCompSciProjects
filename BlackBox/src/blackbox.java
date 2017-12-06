@@ -13,7 +13,7 @@ public class blackbox {
 		char [][] board = setup(); // Row, Col
 		Scanner input = new Scanner(System.in);
 		int choice = 0, cguess = 0, iguess = 0, shots = 0, num1 = 0;
-		display(board, true); // Debug function to display mirror locations
+		//display(board, true); // Debug function to display mirror locations
 		do {
 			if(cguess == 10) {
 				System.out.println("Congratulations! You have found all the mirrors, you have won the day!");
@@ -31,15 +31,15 @@ public class blackbox {
 			if(choice == 1) {
 				System.out.print("Enter where you want to shoot from: ");
 				int num = input.nextInt();
-				if(num < 10) { // Bottom
+				if(num < 10 && num >= 0) { // Bottom
 					shoot('T', board, 0, num);
-				}else if(num < 20) { //Left
+				}else if(num < 20 && num >= 0) { //Left
 					num1 = num - 10;
 					shoot('R', board, num1, 0); // row, col
-				}else if(num < 30) { // Top
+				}else if(num < 30 && num >= 0) { // Top
 					num1 = num - 20;
 					shoot('B', board, 9, num1);
-				}else if(num < 40) { // Right
+				}else if(num < 40 && num >= 0) { // Right
 					num1 = num - 30;
 					shoot('L', board, num1, 9);
 				}else {
@@ -88,9 +88,9 @@ public class blackbox {
 		}
 		return board; // Return the board with all the hidden mirror
 	}
-	public static void display(char [][] board) { //Uncomment function to activate debug mode for very first display call(Debug will output all mirror locations as 0 = / and 1 = \).
+	/*public static void display(char [][] board) { //Uncomment function to activate debug mode for very first display call(Debug will output all mirror locations as 0 = / and 1 = \).
 		display(board, false);
-	}
+	}*/
 	/**
 	 * Displays our array with mirrors hidden
 	 * @param board the array with the mirrors and periods
