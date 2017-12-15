@@ -27,29 +27,38 @@ public class SortsLab
 		
 			System.out.println("List before sorting:");
 			ListSetup.Print (list);
-			System.out.println("Here is the list after the Insertion Sort. ");
-			icount = Sorts.Insertion(list, 0);
-			ListSetup.Print (list);
-			System.out.println("There were " + icount + " comparisons ");
+			//System.out.println("Here is the list after the Insertion Sort. ");
+			//icount = Sorts.Insertion(list, 0);
+			//ListSetup.Print (list);
+			//System.out.println("There were " + icount + " comparisons ");
 		
 		
-			System.out.println("Here is the list after the Selection Sort. ");
-			scount = Sorts.Selection(list2, 0);
-			System.out.println("Scount: " + scount);
-			ListSetup.Print (list2);
+			//System.out.println("Here is the list after the Selection Sort. ");
+			//scount = Sorts.Selection(list2, 0);
+			//System.out.println("Scount: " + scount);
+			//ListSetup.Print (list2);
 			System.out.println("Here is the list after the Quicksort (split first). ");
 			qcount = Sorts.QuickSort(list3, 0, list.length - 1, 0);
 			System.out.println("Qcount: " + qcount);
 			ListSetup.Print (list3);
-			System.out.println("Here is the list after the Merge Sort. ");
-			mcount = Sorts.mergeSort(list4, 0, list.length - 1, 0);
-			System.out.println("Mcount: " + mcount);
-			ListSetup.Print (list4);
-			
-			
+			System.out.println("Here is the list after the Quicksort (split mid). ");
+			qcount = Sorts.QuickMid(list3, 0, list.length - 1, 0);
+			System.out.println("Qcount: " + qcount);
+			ListSetup.Print (list3);
+			System.out.println("Here is the list after the Quicksort (split random). ");
+			qcount = Sorts.QuickRandom(list3, 0, list.length - 1, 0);
+			System.out.println("Qcount: " + qcount);
+			ListSetup.Print (list3);
+			//System.out.println("Here is the list after the Merge Sort. ");
+			////mcount = Sorts.mergeSort(list4, 0, list.length - 1, 0);
+			//System.out.println("Mcount: " + mcount);
+			//ListSetup.Print (list4);
+			System.out.println();
+			System.out.println("---------------------------");
+			System.out.println();
 		//Ascending Order List//////////////////
 	
-			System.out.println("Random order lists ");
+			System.out.println("Ascending order lists ");
 			ListSetup.MakeInOrder (list);
 			ListSetup.Copy (list,list2);
 			ListSetup.Copy (list,list3);
@@ -59,31 +68,40 @@ public class SortsLab
 		
 			System.out.println("List before sorting:");
 			ListSetup.Print (list);
-			System.out.println("Here is the list after the Insertion Sort. ");
-			icount = Sorts.Insertion(list, 0);
-			ListSetup.Print (list);
-			System.out.println("There were " + icount + " comparisons in Asceding order");
+			//System.out.println("Here is the list after the Insertion Sort. ");
+			//icount = Sorts.Insertion(list, 0);
+			//ListSetup.Print (list);
+			//System.out.println("There were " + icount + " comparisons in Asceding order");
 		
 		
-			System.out.println("Here is the list after the Selection Sort. ");
-			scount = Sorts.Selection(list2, 0);
-			System.out.println("Ascending Scount: " + scount);
-			ListSetup.Print (list2);
+			//System.out.println("Here is the list after the Selection Sort. ");
+			//scount = Sorts.Selection(list2, 0);
+			//System.out.println("Ascending Scount: " + scount);
+			//ListSetup.Print (list2);
 			System.out.println("Here is the list after the Quicksort (split first). ");
 			qcount = Sorts.QuickSort(list3, 0, list.length - 1, 0);
 			System.out.println("Ascending Qcount: " + qcount);
 			ListSetup.Print (list3);
-			System.out.println("Here is the list after the Merge Sort. ");
-			mcount = Sorts.mergeSort(list4, 0, list.length - 1, 0);
-			System.out.println("Ascending Mcount: " + mcount);
-			ListSetup.Print (list4);
+			System.out.println("Here is the list after the Quicksort (split mid). ");
+			qcount = Sorts.QuickMid(list3, 0, list.length - 1, 0);
+			System.out.println("Ascending Qcount: " + qcount);
+			ListSetup.Print (list3);
+			System.out.println("Here is the list after the Quicksort (split random). ");
+			qcount = Sorts.QuickRandom(list3, 0, list.length - 1, 0);
+			System.out.println("Ascneding Qcount: " + qcount);
+			ListSetup.Print (list3);
+			//System.out.println("Here is the list after the Merge Sort. ");
+			//mcount = Sorts.mergeSort(list4, 0, list.length - 1, 0);
+			//System.out.println("Ascending Mcount: " + mcount);
+			//ListSetup.Print (list4);
 			
-			
-			
+			System.out.println();
+			System.out.println("---------------------------");
+			System.out.println();
 	
 		//Descending Order List//////////////////
 	
-			System.out.println("Random order lists ");
+			System.out.println("Descending order lists ");
 			ListSetup.MakeReverse (list);
 			ListSetup.Copy (list,list2);
 			ListSetup.Copy (list,list3);
@@ -93,24 +111,32 @@ public class SortsLab
 		
 			System.out.println("List before sorting:");
 			ListSetup.Print (list);
-			System.out.println("Here is the list after the Insertion Sort. ");
-			icount = Sorts.Insertion(list, 0);
-			ListSetup.Print (list);
-			System.out.println("There were " + icount + "  descending comparisons ");
+			//System.out.println("Here is the list after the Insertion Sort. ");
+			//icount = Sorts.Insertion(list, 0);
+			//ListSetup.Print (list);
+			//System.out.println("There were " + icount + "  descending comparisons ");
 		
 		
-			System.out.println("Here is the list after the Selection Sort. ");
-			scount = Sorts.Selection(list2, 0);
-			System.out.println("Descending Scount: " + scount);
-			ListSetup.Print (list2);
+			//System.out.println("Here is the list after the Selection Sort. ");
+			//scount = Sorts.Selection(list2, 0);
+			//System.out.println("Descending Scount: " + scount);
+			//ListSetup.Print (list2);
 			System.out.println("Here is the list after the Quicksort (split first). ");
 			qcount = Sorts.QuickSort(list3, 0, list.length - 1, 0);
 			System.out.println("Descending Qcount: " + qcount);
 			ListSetup.Print (list3);
-			System.out.println("Here is the list after the Merge Sort. ");
-			mcount = Sorts.mergeSort(list4, 0, list.length - 1, 0);
-			System.out.println("Descending Mcount: " + mcount);
-			ListSetup.Print (list4);
+			System.out.println("Here is the list after the Quicksort (split mid). ");
+			qcount = Sorts.QuickMid(list3, 0, list.length - 1, 0);
+			System.out.println("Descending Qcount: " + qcount);
+			ListSetup.Print (list3);
+			System.out.println("Here is the list after the Quicksort (split random). ");
+			qcount = Sorts.QuickRandom(list3, 0, list.length - 1, 0);
+			System.out.println("Descending Qcount: " + qcount);
+			ListSetup.Print (list3);
+			//System.out.println("Here is the list after the Merge Sort. ");
+			//mcount = Sorts.mergeSort(list4, 0, list.length - 1, 0);
+			//System.out.println("Descending Mcount: " + mcount);
+			//ListSetup.Print (list4);
 			
 			
 	}	

@@ -4,6 +4,8 @@
 //  A collection of methods for sorting Arrays.
 //********************************************************************
 
+import java.util.*;
+
 public class Sorts
 {
 
@@ -183,20 +185,109 @@ public class Sorts
 		return qcount;
 	}
 
-	public static int QuickMid(int[] list)
+	public static int QuickMid(int[] list, int from, int to, int qcount)
 	{
+		if (from >= to)
+			return 0;
 
+		// Choose pivot list[p]:
+		int p = (from + to)/2;
+		// The choice of the pivot location may vary:
+		//   you can also use p = from or p = to or use 
+		//   a fancier method, say, the median of the above three.
 
+		// Partition:
 
-		return 0;
+		int i = from;
+		int j = to;
+		while (i <= j)
+		{
+			if (list[i] <= list[p]) {
+				i++;
+				qcount++;
+		}else if (list[j] >= list[p]) {
+				j--;
+				qcount = qcount + 2;
+		}else
+			{
+				swap (list, i, j);
+				i++;
+				j--;
+				qcount = qcount + 2;
+			}
+		}
+
+		// Finish partitioning:
+
+		if (p < j)    // place the pivot in its correct position
+		{
+			swap (list, j, p);
+			p = j;
+		}
+		else if (p > i)
+		{
+			swap (list, i, p);
+			p = i;
+		}
+
+		// Sort recursively:
+		qcount += QuickMid(list, from, p - 1, 0);
+		qcount += QuickMid(list, p + 1, to, 0);
+
+		return qcount;
 	}
 
-	public static int QuickRandom(int[] list)
+	public static int QuickRandom(int[] list, int from, int to, int qcount)
 	{
+		if (from >= to)
+			return 0;
 
+		// Choose pivot list[p]:
+		Random random = new Random();
+		int p =  (from + (random.nextInt(to-from)));
+		// The choice of the pivot location may vary:
+		//   you can also use p = from or p = to or use 
+		//   a fancier method, say, the median of the above three.
 
+		// Partition:
 
-		return 0;
+		int i = from;
+		int j = to;
+		while (i <= j)
+		{
+			if (list[i] <= list[p]) {
+				i++;
+				qcount++;
+		}else if (list[j] >= list[p]) {
+				j--;
+				qcount = qcount + 2;
+		}else
+			{
+				swap (list, i, j);
+				i++;
+				j--;
+				qcount = qcount + 2;
+			}
+		}
+
+		// Finish partitioning:
+
+		if (p < j)    // place the pivot in its correct position
+		{
+			swap (list, j, p);
+			p = j;
+		}
+		else if (p > i)
+		{
+			swap (list, i, p);
+			p = i;
+		}
+
+		// Sort recursively:
+		qcount += QuickRandom(list, from, p - 1, 0);
+		qcount += QuickRandom(list, p + 1, to, 0);
+
+		return qcount;
 	}
 
 	private static void swap (int[] list, int a, int b)
