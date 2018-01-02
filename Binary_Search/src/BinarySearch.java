@@ -14,9 +14,9 @@ public class BinarySearch {
 		output(array);
 		System.out.println();
 		defaultBinarySearch(array);
-		
+
 	}
-	
+
 	public static int[] setup() {
 		Random random = new Random();
 		int binarySearchArray[] = new int[random.nextInt(31) + 20];
@@ -25,7 +25,7 @@ public class BinarySearch {
 		}
 		return binarySearchArray;
 	}
-	
+
 	public static void output(int[] array) {
 		System.out.println("Original Array of " + array.length + " elements before sort: ");
 		for(int a = 0; a < array.length; a++) {
@@ -44,7 +44,7 @@ public class BinarySearch {
 			}
 		}
 	}
-	
+
 	public static void defaultBinarySearch(int []array) {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Built-in Binary Search: ");
@@ -56,13 +56,16 @@ public class BinarySearch {
 		}else {
 			System.out.println("Status: not found");
 		}
-		
+
 	}
-	
-	public static int customBinarySearch(int []array, int item, int from, int to) {
-		int low = from;
-		int high = to-1;
-		
-		if(ite)
+
+	public static int customBinarySearch(int []array, int from, int to, int probes, int item) { //Our Recursive Binary Search Function
+		int high = array.lenth-1;
+		int low = 0;
+		int mid = ((from+low)/2);
+		if(array[mid] == item) {
+			return mid;
+		}
+		if()
 	}
 }
