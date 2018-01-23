@@ -44,7 +44,7 @@ public class cabbages {
 	 * @throws IOException
 	 */
 
-	public static void output2() throws IOException {
+	public static void output2() throws IOException{
 		String[] words = stringArray();
 		for(int a = 0; a < words.length; a++) { // Replaces all punctuation
 			words[a] = words[a].replace('.', ' ');
@@ -75,7 +75,8 @@ public class cabbages {
 	public static void grep() throws IOException{
 		BufferedReader f = new BufferedReader(new FileReader("Cabbages.txt"));
 		Scanner in = new Scanner(System.in);
-		String line = "", input = "";
+		in.reset();
+		String line = "", input = "", wrappedPhrase = "";
 		int c = 0, foundCount = 0;
 		boolean found = false;
 		System.out.print("Please enter something you want to grep: ");
@@ -86,8 +87,8 @@ public class cabbages {
 			while(index >= 0) {
 				String modified = "<" + line.substring(line.indexOf(input), (line.indexOf(input)+input.length())) + ">";
 				found = true;
-				index = line.indexOf(input, index + 1);
 				System.out.println("Found on line: " + c + ", which is: " + line.replace(input, modified));
+				index = line.indexOf(input, index + 1);
 				foundCount++;
 			}
 		}
@@ -99,6 +100,8 @@ public class cabbages {
 	}
 
 
+	
+	
 	/**
 	 * Creates our array of strings with correct length
 	 * @return the Array filled with every single word.
