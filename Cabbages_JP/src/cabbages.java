@@ -4,10 +4,18 @@ import java.io.*;
 
 public class cabbages {
 
+	/*
+	 *	Name: Jules Petit
+	 *	Block: E 
+	 */
+
+	/*
+	 * TODO:
+	 * 1. Make it so grep can handle wrapped phrases
+	 */
 	public static void main(String[] args) throws IOException {
 		String line = "", BiggestLine = "";
 		int b = 0, c = 0;
-		// TODO Auto-generated method stub
 		//Using buffered reader is much faster to read.
 		BufferedReader f = new BufferedReader(new FileReader("Cabbages.txt"));
 		Scanner in = new Scanner(f);
@@ -20,19 +28,25 @@ public class cabbages {
 			System.out.println(b + " " + line);
 		}
 		System.out.println("The longest word in the text is: <" + BiggestLine + ">");
-		//output2();
-		grep();
+		System.out.println("------------------------");
+		System.out.println("Words sorted alphabetically with duplicates and punctuation removed");
+		output2();
+		System.out.println("------------------------");
+		for(int a = 0; a < 3; a++) {
+			grep();
+			System.out.println("------------------------");
+		}
 
 	}
 
-	public static void output2() throws IOException{
-		BufferedReader f = new BufferedReader(new FileReader("Cabbages.txt"));
-		String line = "", duplicate = "", noPunctuation = "";
-		int b = 0;
-		Scanner in = new Scanner(f);
+	/**
+	 * Function which removes all punctuation, removes duplicates, sorts the words alphabetically, and put to lowercase
+	 * @throws IOException
+	 */
+
+	public static void output2() throws IOException {
 		String[] words = stringArray();
-		for(int a = 0; a < words.length; a++) {
-			b++;
+		for(int a = 0; a < words.length; a++) { // Replaces all punctuation
 			words[a] = words[a].replace('.', ' ');
 			words[a] = words[a].replace(',', ' ');
 			words[a] = words[a].replace(';', ' ');
@@ -52,22 +66,38 @@ public class cabbages {
 			}
 		}
 	}
-	
+
+	/**
+	 * grep(globally search for the regular expression and print the lines) function. Finds how many times a given input string is found with the text
+	 * @throws IOException
+	 */
+
 	public static void grep() throws IOException{
+		BufferedReader f = new BufferedReader(new FileReader("Cabbages.txt"));
 		Scanner in = new Scanner(System.in);
-		String line = "";
+		String line = "", input = "";
+		int c = 0, foundCount = 0;
+		boolean found = false;
 		System.out.print("Please enter something you want to grep: ");
-		String input = in.nextLine();
-		in.close();
-		BufferedReader f = new BufferedReader(new FileReader("Cabbages.txt")); // New Buffered Reader
-		Scanner lineScanner = new Scanner(f);
-		line = in.next();
-		/*Uncomment grepArray.
-		 * 1. Check if the line has the input(indexOf(string) != -1)
-		 * 2. If it does then check with the array to find out which line it is on(array[a]).
-		 */
+		input = in.nextLine();
+		while((line = f.readLine()) != null) {
+			c++;
+			int index = line.indexOf(input);
+			while(index >= 0) {
+				String modified = "<" + line.substring(line.indexOf(input), (line.indexOf(input)+input.length())) + ">";
+				found = true;
+				index = line.indexOf(input, index + 1);
+				System.out.println("Found on line: " + c + ", which is: " + line.replace(input, modified));
+				foundCount++;
+			}
+		}
+		if(!found) {
+			System.out.println("Sorry, the input string of: \"" + input + "\" was not found within the given file.");
+		}else {
+			System.out.println("In total, the input string of: \"" + input + "\"" + " was found " + foundCount + " times.");
+		}
 	}
-	
+
 
 	/**
 	 * Creates our array of strings with correct length
@@ -92,26 +122,4 @@ public class cabbages {
 		}
 		return words;
 	}
-
-	/*public static String[] lineArray() throws IOException {
-		BufferedReader f = new BufferedReader(new FileReader("Cabbages.txt")); // New Buffered Reader
-		int counter = 0;
-		while(f.readLine() != null) {
-			counter++;
-			f.readLine();
-		}
-		f.close();
-		BufferedReader g = new BufferedReader(new FileReader("Cabbages.txt"));
-		Scanner input = new Scanner(g);
-		String []lines = new String[counter];
-		for(int a = 0; input.hasNextLine(); a++) {
-			while(g.readLine() != null) {
-				lines[a] = input.nextLine();
-			}
-		}
-		input.close();
-		return lines;
-	}
-	*/
-
 }
