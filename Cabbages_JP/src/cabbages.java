@@ -76,7 +76,7 @@ public class cabbages {
 		BufferedReader f = new BufferedReader(new FileReader("Cabbages.txt"));
 		Scanner in = new Scanner(System.in);
 		in.reset();
-		String line = "", input = "", wrappedPhrase = "";
+		String line = "", input = "", wrappedPhrase = "", modified = "";
 		int c = 0, foundCount = 0;
 		boolean found = false;
 		System.out.print("Please enter something you want to grep: ");
@@ -85,10 +85,10 @@ public class cabbages {
 			c++;
 			int index = line.indexOf(input);
 			while(index >= 0) {
-				String modified = "<" + line.substring(line.indexOf(input), (line.indexOf(input)+input.length())) + ">";
+				modified = "<" + line.substring(line.indexOf(input), (line.indexOf(input)+input.length())) + ">";
 				found = true;
-				System.out.println("Found on line: " + c + ", which is: " + line.replace(input, modified));
 				index = line.indexOf(input, index + 1);
+				System.out.println("Found on line: " + c + ", which is: " + line.replace(input, modified));
 				foundCount++;
 			}
 		}
