@@ -12,6 +12,7 @@ public class cabbages {
 	/*
 	 * TODO:
 	 * 1. Make it so grep can handle wrapped phrases
+	 * 2. Ask what the delimeter for new phrases is.
 	 */
 	public static void main(String[] args) throws IOException {
 		String line = "", BiggestLine = "";
@@ -75,7 +76,6 @@ public class cabbages {
 	public static void grep() throws IOException{
 		BufferedReader f = new BufferedReader(new FileReader("Cabbages.txt"));
 		Scanner in = new Scanner(System.in);
-		in.reset();
 		String line = "", input = "", wrappedPhrase = "", modified = "";
 		int c = 0, foundCount = 0;
 		boolean found = false;
@@ -83,21 +83,25 @@ public class cabbages {
 		input = in.nextLine();
 		while((line = f.readLine()) != null) {
 			c++;
+			found = false;
 			int index = line.indexOf(input);
 			while(index >= 0) {
 				modified = "<" + line.substring(line.indexOf(input), (line.indexOf(input)+input.length())) + ">";
 				found = true;
 				index = line.indexOf(input, index + 1);
-				System.out.println("Found on line: " + c + ", which is: " + line.replace(input, modified));
 				foundCount++;
 			}
+			if(found) {
+				System.out.println("Found on line: " + c + ", which is: " + line.replace(input, modified));
+			}
 		}
-		if(!found) {
+		if(foundCount <= 0) {
 			System.out.println("Sorry, the input string of: \"" + input + "\" was not found within the given file.");
 		}else {
 			System.out.println("In total, the input string of: \"" + input + "\"" + " was found " + foundCount + " times.");
 		}
 	}
+	
 
 
 	
