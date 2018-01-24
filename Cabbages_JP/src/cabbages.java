@@ -98,7 +98,7 @@ public class cabbages {
 		if(foundCount <= 0) {
 			System.out.println("Sorry, the input string of: \"" + input + "\" was not found within the given file.");
 		}else {
-			System.out.println("In total, the input string of: \"" + input + "\"" + " was found " + foundCount + " times.");
+			System.out.println("In total, the input string of: \"" + input + "\"" + " was found " + foundCount + " time(s).");
 		}
 	}
 	
