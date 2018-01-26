@@ -29,16 +29,14 @@ public class cabbages {
 			System.out.println(b + " " + line);
 		}
 		System.out.println("The longest word in the text is: <" + BiggestLine + ">");
-		//		System.out.println("------------------------");
-		//		System.out.println("Words sorted alphabetically with duplicates and punctuation removed");
-		//		output2();
-		//		System.out.println("------------------------");
-		//		for(int a = 0; a < 3; a++) {
-		//			grep();
-		//			System.out.println("------------------------");
-		//		}
-		grep2();
-
+		System.out.println("------------------------");
+		System.out.println("Words sorted alphabetically with duplicates and punctuation removed");
+		output2();
+		System.out.println("------------------------");
+		for(int a = 0; a < 3; a++) {
+			grep();
+			System.out.println("------------------------");
+		}
 	}
 
 	/**
@@ -100,80 +98,6 @@ public class cabbages {
 			System.out.println("Sorry, the input string of: \"" + input + "\" was not found within the given file.");
 		}else {
 			System.out.println("In total, the input string of: \"" + input + "\"" + " was found " + foundCount + " time(s).");
-		}
-	}
-
-	public static void grep2() throws IOException {
-		BufferedReader f = new BufferedReader(new FileReader("Cabbages.txt"));
-		Scanner in = new Scanner(System.in);
-		String input = "", output = "", line = "", lineInput = "", formattedOutput = "", otherLineInput = "";
-		System.out.print("Please enter something you want to grep: ");
-		input = in.nextLine();
-		int length = input.length();
-		int a = 0, b = 0, d = 0, lineCount = 0;
-		boolean incomplete = true, multipleLine = false, found = false, firstLine = false;
-		while((line = f.readLine()) != null) {
-			lineCount++;
-			if(incomplete) {
-				b++;
-				output += " ";
-			}
-			a = 0;
-			for(int c = 0; c < line.length(); c++) {	
-				if(line.charAt(a) == input.charAt(b)) {
-					incomplete = true;
-					int lineLength = line.length();
-					output += line.charAt(a);
-					a++;
-					b++;
-					if(a == line.length()) {// Reached end of line
-						if(incomplete) {
-							multipleLine = true;
-							if(!firstLine) { // First time we see it.
-								formattedOutput ="<" + output + "\n";
-								firstLine = true;
-								lineInput = output;
-							}else { // Has been seen before
-								otherLineInput = output;
-								otherLineInput = otherLineInput.replace(lineInput, "");
-								lineInput = otherLineInput;
-								formattedOutput += (lineInput + "\n");
-							}
-						}
-					}
-					if(output.length() == input.length()) {// We have the entire string HURRAY!!!!
-						incomplete = false;
-						if(multipleLine) { // It was found on multiple lines but not at the end of the nth line.
-							output = output.replace(lineInput, "");
-							lineInput = output;
-							formattedOutput += lineInput;
-							System.out.print(formattedOutput + ">");
-						}else { // Only found on one line or at the end of the nth one.
-							System.out.print(output + ">");
-						}
-						b = 0;
-						output = "";
-						found = true;
-					}
-				}else {
-					if(output.length() > 0) {
-						//System.out.print(output);
-						output = "";
-					}
-					//System.out.print(line.charAt(a));
-					b = 0;
-					a++;
-				}
-			}
-			if(incomplete && multipleLine && !found) {
-				System.out.println("Found on line: " + lineCount + " which is: " + formattedOutput.replace("\n", ""));
-			}
-			/*if(!incomplete || found) {
-			System.out.println();
-			}*/
-		}
-		if(!found) {
-			System.out.print("I'm sorry, the input string of: \"" + input + "\" was not found in the text." );
 		}
 	}
 
