@@ -8,12 +8,6 @@ public class cabbages {
 	 *	Name: Jules Petit
 	 *	Block: E 
 	 */
-
-	/*
-	 * TODO:
-	 * 1. Make it so grep can handle wrapped phrases
-	 * 2. Ask what the delimeter for new phrases is.
-	 */
 	public static void main(String[] args) throws IOException {
 		String line = "", BiggestLine = "";
 		int b = 0, c = 0;
@@ -75,7 +69,7 @@ public class cabbages {
 	public static void grep() throws IOException{
 		BufferedReader f = new BufferedReader(new FileReader("Cabbages.txt"));
 		Scanner in = new Scanner(System.in);
-		String line = "", input = "", wrappedPhrase = "", modified = "";
+		String line = "", input = "", modified = "";
 		int c = 0, foundCount = 0;
 		boolean found = false;
 		System.out.print("Please enter something you want to grep: ");
