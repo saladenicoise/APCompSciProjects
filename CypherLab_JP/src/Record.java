@@ -1,40 +1,41 @@
 import java.io.*;
 import java.util.*;
 
-class mainClass {
-	public static void main(String[] args) {
-		
-	}
-}
-
 public class Record {
 	
 	private char letter;
 	private int frequency;
 
+	/**
+	 * Creates a new record with just default stuff.
+	 */
+	
 	public Record() {
 		this.frequency = 0;
 	}
 	
 	public Record(char curLetter) {
-		this.letter = curLetter;
+		letter = curLetter;
+		frequency = 0;
 	}
 	
-	public int getFrequency(String s) {
+	public void setFrequency(String s) {
 		for(Character c : s.toCharArray()) {
 			if(c == letter) {
 				frequency++;
 			}
 		}
-		return frequency;
 	}
 	
-	public char changeLetter(char a) {
+	public void setLetter(char a) {
 		letter = a;
-		return a;
 	}
 	
 	public char getLetter() {
 		return letter;
+	}
+	
+	public int getFrequency() {
+		return frequency;
 	}
 }
