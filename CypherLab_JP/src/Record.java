@@ -10,6 +10,11 @@ public class Record implements Comparable <Record>{
 	 * Creates a new record with just default stuff.
 	 */
 	
+	
+	/*TODO:
+	 * Read each frequency letter into an array, then compare the sorted array of frequencies and find highestFreq in array and output what is the frequencyTable[a];
+	 */
+	
 	public Record() {
 		this.frequency = 0;
 	}
@@ -59,5 +64,9 @@ public class Record implements Comparable <Record>{
 	
 	public int compareMe(Record a, Record b) {
 		return a.compareTo(b);
+	}
+	
+	public int recordIntoArray(char frequencyLetter) {
+		return 0;
 	}
 }
