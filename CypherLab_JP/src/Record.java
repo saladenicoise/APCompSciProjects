@@ -5,6 +5,8 @@ public class Record implements Comparable <Record>{
 	
 	private char letter;
 	private int frequency;
+	private char associated;
+	//private char[] frequencyArray;
 
 	/**
 	 * Creates a new record with just default stuff.
@@ -66,7 +68,11 @@ public class Record implements Comparable <Record>{
 		return a.compareTo(b);
 	}
 	
-	public int recordIntoArray(char frequencyLetter) {
-		return 0;
+	public void setAssociated(char a) {
+		associated = a;
+	}
+	
+	public char getAssociated() {
+		return associated;
 	}
 }
