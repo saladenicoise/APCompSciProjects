@@ -40,6 +40,13 @@ public class Record implements Comparable <Record>{
 		}
 	}
 	
+	//public int addFrequencyReturn(char c) {
+	//	if(c == letter) {
+	//		frequency++;
+	//	}
+	//	return frequency;
+	//}
+	
 	public void setLetter(char a) {
 		letter = a;
 	}
@@ -75,4 +82,9 @@ public class Record implements Comparable <Record>{
 	public char getAssociated() {
 		return associated;
 	}
+	
+	//public void getFrequencyOf(char a) {
+	//	frequency = addFrequencyReturn(a);
+	//	setFrequency(frequency);
+	//}
 }
