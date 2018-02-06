@@ -3,6 +3,11 @@ import java.util.*;
 
 public class Record implements Comparable <Record>{
 	
+	/*
+	 * Name: Jules Petit
+	 * Block: E
+	 */
+	
 	private char letter;
 	private int frequency;
 	private char associated;
