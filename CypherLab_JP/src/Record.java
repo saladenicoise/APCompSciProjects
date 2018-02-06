@@ -6,6 +6,7 @@ public class Record implements Comparable <Record>{
 	private char letter;
 	private int frequency;
 	private char associated;
+	private boolean isDupe = false;
 	//private char[] frequencyArray;
 
 	/**
@@ -81,6 +82,14 @@ public class Record implements Comparable <Record>{
 	
 	public char getAssociated() {
 		return associated;
+	}
+	
+	public void setDupe(boolean check) {
+		isDupe = check;
+	}
+	
+	public boolean getDupe() {
+		return isDupe;
 	}
 	
 	//public void getFrequencyOf(char a) {
