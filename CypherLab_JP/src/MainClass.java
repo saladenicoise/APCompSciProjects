@@ -3,11 +3,22 @@ import java.util.*;
 
 
 public class MainClass {
+	/*
+	 * Name: Jules Petit
+	 * Block: E
+	 */
+	
+	/*
+	 * TODO:
+	 * 1. Ask Mr. Harris about his wanted output for the doubles and when decoded acording to the rubric and frequency chart it doesnt make sense
+	 * 2. Implement Answer
+	 */
 
 	public static void main(String[] args) throws IOException{
 		BufferedReader f = new BufferedReader(new FileReader("cipher.txt"));
 		BufferedReader g = new BufferedReader(new FileReader("replace.txt"));
 		BufferedReader h = new BufferedReader(new FileReader("cipher.txt"));
+		PrintWriter out = new PrintWriter(new FileWriter("decoded.txt")); 
 		Scanner in = new Scanner(f);
 		Scanner in2 = new Scanner(h);
 		Scanner input = new Scanner(g);
@@ -68,31 +79,33 @@ public class MainClass {
 		//		}
 
 		while(in2.hasNext()) {
-			newLine = in2.next();
-			for(int a = 0; a < newLine.length(); a++) {
-				char curChar = newLine.charAt(a);
-				if(!(curChar == '!' || curChar == ',' || curChar == '.' || curChar == '"' || curChar == '\'')) {
+			line = in2.nextLine();
+			newLine = "";
+			for(int a = 0; a < line.length(); a++) {
+				char curChar = line.charAt(a);
+				if(!(curChar == '!' || curChar == ',' || curChar == '.' || curChar == '"' || curChar == '\'' || curChar == ' ')) {
 					for(int b = 0; b < alphabet.length; b++) {
 						if(curChar == alphabet[b].getLetter()) {
-							if((alphabet[b].getFrequency() == alphabet[b+1].getFrequency()) && b < alphabet.length) {
-								//System.out.print("\n Duplicate has been found! What would you like to set the value of " + curChar + " to?: ");
-								//String choice = userInput.next();
-								//char replaceLetter = choice.charAt(0);
-								//alphabet[b].setAssociated(replaceLetter);
-								System.out.print(alphabet[b].getAssociated());
-								//newLine = newLine.replace(curChar, alphabet[b].getAssociated());
-							}else {
-								System.out.print(alphabet[b].getAssociated());
-								//newLine = newLine.replace(curChar, alphabet[b].getAssociated());
+							if((alphabet[b].getFrequency() == alphabet[b+1].getFrequency())&& b < alphabet.length) {
+								System.out.print(" Duplicate found, which letter should be assigned to " + curChar + " ?:");
+								String inputString = userInput.next();
+								char replace = inputString.charAt(0); // Get the given character
+								alphabet[b].setAssociated(replace); 
+								newLine = newLine + alphabet[b].getAssociated(); 
+							} else {
+								newLine = newLine + alphabet[b].getAssociated(); 
 							}
 						}
 					}
 				}else {
-					System.out.print(curChar);
+					//System.out.print(curChar);
+					newLine = newLine + curChar; 
 				}
 			}
-			//System.out.print(newLine);
-			System.out.println();
+			System.out.println(newLine);
+			out.write(newLine);
+			out.write("\n");
 		}
+		out.close();
 	}
 }
