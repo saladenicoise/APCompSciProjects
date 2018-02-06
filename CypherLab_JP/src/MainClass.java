@@ -8,12 +8,6 @@ public class MainClass {
 	 * Block: E
 	 */
 
-	/*
-	 * TODO:
-	 * 1. Ask Mr. Harris about his wanted output for the doubles and when decoded acording to the rubric and frequency chart it doesnt make sense
-	 * 2. Implement Answer
-	 */
-
 	public static void main(String[] args) throws IOException{
 		BufferedReader f = new BufferedReader(new FileReader("cipher.txt"));
 		BufferedReader g = new BufferedReader(new FileReader("replace.txt"));
