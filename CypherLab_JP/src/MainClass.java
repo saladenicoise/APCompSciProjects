@@ -97,7 +97,7 @@ public class MainClass {
 		System.out.println();
 		for(int a = 0; a < 25; a++) {
 			if(alphabet[a].getFrequency() == alphabet[a+1].getFrequency()) {
-				System.out.println("Dupe " + alphabet[a].getAssociated() + " " + alphabet[a+1].getAssociated());
+				System.out.println("Dupeplicate Letter: " + alphabet[a].getAssociated() + " and " + alphabet[a+1].getAssociated());
 				alphabet[a].setDupe(true);
 				alphabet[a+1].setDupe(true);
 				dupePairCount++;
