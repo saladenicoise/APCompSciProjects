@@ -80,7 +80,7 @@ public class MainClass {
 			newLine = "";
 			for(int a = 0; a < line.length(); a++) {
 				char curChar = line.charAt(a);
-				if(!(curChar == '!' || curChar == ',' || curChar == '.' || curChar == '"' || curChar == '\'' || curChar == ' ')) {
+				if(!(curChar == '!' || curChar == ',' || curChar == '.' || curChar == '"' || curChar == '\'' || curChar == ' ' || curChar == '-' || curChar == ';' || curChar == ':')) {
 					for(int b = 0; b < alphabet.length; b++) {
 						if(curChar == alphabet[b].getLetter()) {
 							newLine = newLine + alphabet[b].getAssociated();
@@ -97,7 +97,7 @@ public class MainClass {
 		System.out.println();
 		for(int a = 0; a < 25; a++) {
 			if(alphabet[a].getFrequency() == alphabet[a+1].getFrequency()) {
-				System.out.println("Dupeplicate Letter: " + alphabet[a].getAssociated() + " and " + alphabet[a+1].getAssociated());
+				System.out.println("Duplicate Letter: " + alphabet[a].getAssociated() + " and " + alphabet[a+1].getAssociated());
 				alphabet[a].setDupe(true);
 				alphabet[a+1].setDupe(true);
 				dupePairCount++;
@@ -106,7 +106,6 @@ public class MainClass {
 		while(input2.hasNext()) { // Find and translate dupes
 			line = input2.next();
 			newLine = "";
-			System.out.println("Dupe Pair Count: "+ dupePairCount);
 			for(int a = 0; a < line.length(); a++) {
 				char curChar = line.charAt(a);
 				for(int b = 0; b < 25; b++) {
@@ -161,7 +160,7 @@ public class MainClass {
 			String newLine = "";
 			for(int a = 0; a < line.length(); a++) {
 				char curChar = line.charAt(a);
-				if(!(curChar == '!' || curChar == ',' || curChar == '.' || curChar == '"' || curChar == '\'' || curChar == ' ')) {
+				if(!(curChar == '!' || curChar == ',' || curChar == '.' || curChar == '"' || curChar == '\'' || curChar == ' ' || curChar == '-' || curChar == ';' || curChar == ':')) {
 					for(int b = 0; b < alphabet.length; b++) {
 						if(curChar == alphabet[b].getLetter()) {
 							newLine = newLine + alphabet[b].getAssociated();
@@ -184,7 +183,7 @@ public class MainClass {
 			String newLine = "";
 			for(int a = 0; a < line.length(); a++) {
 				char curChar = line.charAt(a);
-				if(!(curChar == '!' || curChar == ',' || curChar == '.' || curChar == '"' || curChar == '\'' || curChar == ' ')) {
+				if(!(curChar == '!' || curChar == ',' || curChar == '.' || curChar == '"' || curChar == '\'' || curChar == ' ' || curChar == '-' || curChar == ';' || curChar == ':')) {
 					for(int b = 0; b < alphabet.length; b++) {
 						if(curChar == alphabet[b].getLetter()) {
 							newLine = newLine + alphabet[b].getAssociated();
