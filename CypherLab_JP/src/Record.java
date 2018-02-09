@@ -97,8 +97,20 @@ public class Record implements Comparable <Record>{
 		return isDupe;
 	}
 	
-	//public void getFrequencyOf(char a) {
-	//	frequency = addFrequencyReturn(a);
-	//	setFrequency(frequency);
-	//}
 }
+
+class LetterComparator implements Comparator {
+	
+	public int compare(Object a, Object b) {
+		char originalLetter1 = ((Record)a).getLetter();
+		char originalLetter2 = ((Record)b).getLetter();
+		if((int)originalLetter1 > (int)originalLetter2) {
+			return 1;
+		}else if((int)originalLetter1 < (int)originalLetter2) {
+			return -1;
+		}else {
+			return 0;
+		}
+	}
+}
+//Associated comparator
