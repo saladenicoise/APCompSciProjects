@@ -99,32 +99,32 @@ public class Record implements Comparable <Record>{
 	
 }
 
-class LetterComparator implements Comparator {
-	
-	public int compare(Object a, Object b) {
-		char originalLetter1 = ((Record)a).getLetter();
-		char originalLetter2 = ((Record)b).getLetter();
-		if((int)originalLetter1 > (int)originalLetter2) {
-			return 1;
-		}else if((int)originalLetter1 < (int)originalLetter2) {
-			return -1;
-		}else {
-			return 0;
-		}
-	}
-}
+//class LetterComparator implements Comparator {
+//	
+//	public int compare(Object a, Object b) {
+//		char originalLetter1 = ((Record)a).getLetter();
+//		char originalLetter2 = ((Record)b).getLetter();
+//		if((int)originalLetter1 > (int)originalLetter2) {
+//			return 1;
+//		}else if((int)originalLetter1 < (int)originalLetter2) {
+//			return -1;
+//		}else {
+//			return 0;
+//		}
+//	}
+//}
 //Associated comparator
-class AssociatedComparator implements Comparator {
-	
-	public int compare(Object a, Object b) {
-		char associatedLetter1 = ((Record)a).getAssociated();
-		char associatedLetter2 = ((Record)b).getAssociated();
-		if((int)associatedLetter1 > (int)associatedLetter2) {
-			return 1;
-		}else if((int)associatedLetter1 < (int)associatedLetter2) {
-			return -1;
-		}else {
-			return 0;
-		}
-	}
-}
+//class AssociatedComparator implements Comparator {
+//	
+//	public int compare(Object a, Object b) {
+//		char associatedLetter1 = ((Record)a).getAssociated();
+//		char associatedLetter2 = ((Record)b).getAssociated();
+//		if((int)associatedLetter1 > (int)associatedLetter2) {
+//			return 1;
+//		}else if((int)associatedLetter1 < (int)associatedLetter2) {
+///			return -1;
+//		}else {
+//			return 0;
+//		}
+//	}
+//}
