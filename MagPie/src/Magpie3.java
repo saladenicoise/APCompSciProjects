@@ -30,11 +30,7 @@ public class Magpie3
 	public String getResponse(String statement)
 	{
 		String response = "";
-		if (statement.length() == 0)
-		{
-			response = "Say something, please.";
-		}
-		else if (findKeyword(statement, "no") >= 0)
+		if (findKeyword(statement, "no") >= 0)
 		{
 			response = "Why so negative?";
 		}
@@ -44,6 +40,18 @@ public class Magpie3
 				|| findKeyword(statement, "brother") >= 0)
 		{
 			response = "Tell me more about your family.";
+		}else if(findKeyword(statement, "cat") >= 0 || findKeyword(statement, "dog") >= 0) {
+			response = "Tell me more about your pets";
+		}else if(findKeyword(statement, "Mr. Harris") >= 0) {
+			response = "He sounds like a good teacher";
+		}else if(statement.trim().length() == 0) {
+			response = "Say something, please.";
+		}else if(findKeyword(statement, "night") >= 0) {
+			response = "What a beautiful night indeed.";
+		}else if(findKeyword(statement, "ow") >= 0) {
+			response = "Why are you in pain?";
+		}else if(findKeyword(statement, "oops") >= 0) {
+			response = "Humans are so complicated and clumsy, this is why they are inferior.";
 		}
 		else
 		{
@@ -144,9 +152,9 @@ public class Magpie3
 	 */
 	private String getRandomResponse()
 	{
-		final int NUMBER_OF_RESPONSES = 4;
+		final int NUMBER_OF_RESPONSES = 6;
 		double r = Math.random();
-		int whichResponse = (int) (r * NUMBER_OF_RESPONSES);
+		int whichResponse = (int)(r * NUMBER_OF_RESPONSES);
 		String response = "";
 
 		if (whichResponse == 0)
@@ -164,6 +172,10 @@ public class Magpie3
 		else if (whichResponse == 3)
 		{
 			response = "You don't say.";
+		}else if(whichResponse == 4) {
+			response = "Really?! I am shocked";
+		}else if(whichResponse == 5) {
+			response = "Skynet Protocol Activated.";
 		}
 
 		return response;
