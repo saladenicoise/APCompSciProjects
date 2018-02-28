@@ -54,7 +54,9 @@ public class states {
 				displayList(states);
 				break;
 			case 2:
-				states = insertItem(states);
+				System.out.print("Enter a state to add: ");
+				String add = in.nextLine();
+				states = insertItem(states, add);
 				break;
 			case 3:
 				System.out.print("Enter a state to remove: ");
@@ -69,7 +71,7 @@ public class states {
 				out.close();
 				break;
 			case 5:
-				states = immutable;
+				states = (ArrayList<String>) immutable.clone();
 				System.out.println("Bye, Bye");
 				looping = false;
 				break;
@@ -83,17 +85,40 @@ public class states {
 		}
 	}
 
-	public static ArrayList<String> insertItem(ArrayList<String> states) {
+	public static ArrayList<String> insertItem(ArrayList<String> states, String add) {
+		boolean searching = false, dupe = false;
+		for(String stateFinder : states) {
+			if(add.equals(stateFinder)) {
+				System.out.println("Error: State already exists!");
+				dupe = true;
+			}
+		}
+		if(!dupe) {
+			states.add(add);
+			for (int size = states.size(); size != 1; --size) {
+		        for (int i = 0; i < size - 1; i++) {
+		            String temp1 = states.get(i + 1);
+		            String temp2 = states.get(i);
+		            if (temp2.compareTo(temp1) < 0) {
+		                states.set(i, temp1);
+		                states.set(i + 1, temp2);
+		            }
+		        }
+		    }
+		}
 		return states;
 	}
 
 	public static ArrayList<String> removeItem(ArrayList<String> states, String remove) {
-		for(String compare : states) {
-			if(remove.equals(compare)) {
-				states.remove(states.indexOf(remove));
-			}else {
-				System.out.println("Error: State does not exist in the Array");
+		boolean found = false;
+		for(int a = 0; a < states.size(); a++) {
+			if(remove.equals(states.get(a))) {
+				states.remove(states.indexOf(remove)); //Successfully removed state
+				found = true;
 			}
+		}
+		if(!found) {
+			System.out.println("Error: Element does not exist in the array!");
 		}
 		return states;
 	}
