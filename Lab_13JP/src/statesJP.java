@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class states {
+public class statesJP {
 
 	/*
 	 * Name: Jules Petit
@@ -36,7 +36,6 @@ public class states {
 		ArrayList<String> immutable = (ArrayList<String>) states.clone();
 		int choice = 0;
 		boolean  looping = true;
-		PrintWriter out = new PrintWriter("SavedStates.txt");
 		Scanner input = new Scanner(System.in);
 		Scanner in = new Scanner(System.in);
 		while(looping) {
@@ -64,14 +63,12 @@ public class states {
 				states = removeItem(states, remove);
 				break;
 			case 4:
-				System.out.println("Saving to file: SavedStates.txt");
-				for(String statesLine : states) {
-					out.println(statesLine);
-				}
-				out.close();
+				System.out.println("Overwriting File");
+				save(states);
 				break;
 			case 5:
 				states = (ArrayList<String>) immutable.clone();
+				save(states);
 				System.out.println("Bye, Bye");
 				looping = false;
 				break;
@@ -99,7 +96,7 @@ public class states {
 		        for (int i = 0; i < size - 1; i++) {
 		            String temp1 = states.get(i + 1);
 		            String temp2 = states.get(i);
-		            if (temp2.compareTo(temp1) < 0) {
+		            if (temp2.compareTo(temp1) > 0) {
 		                states.set(i, temp1);
 		                states.set(i + 1, temp2);
 		            }
@@ -121,5 +118,13 @@ public class states {
 			System.out.println("Error: Element does not exist in the array!");
 		}
 		return states;
+	}
+	
+	public static void save(ArrayList<String> states) throws IOException{
+		PrintWriter out = new PrintWriter("states.in");
+		for(String statesLine : states) {
+			out.println(statesLine);
+		}
+		out.close();
 	}
 }
