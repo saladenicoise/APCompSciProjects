@@ -8,6 +8,10 @@ import java.util.ArrayList;
  */
 public class Deck {
 
+	/*
+	 * Name: Jules Petit
+	 * Block: E
+	 */
 	/**
 	 * cards contains all the cards in the deck.
 	 */
@@ -30,14 +34,15 @@ public class Deck {
 	 * @param values is an array containing all of the card point values.
 	 */
 	public Deck(String[] ranks, String[] suits, int[] values) {
+		cards = new ArrayList<Card>();
+		System.out.println("Ranks size: " + ranks.length);
 		for(int a = 0; a < ranks.length; a++) {
-			String currRank = ranks[a];
-			for(int b = 0; b < suits.length; b++) {
-				System.out.println("Loope");
-				System.out.println("Size: " + cards.size());
-				Card card = new Card(currRank, suits[b], values[a]);
+			for(String suit : suits) {
+				System.out.println("Cards Size: " + cards.size() + " | Suit Value: " + suit + " | Rank Value: " + ranks[a] + " | Value: " + values[a] + " | A: " + a);
+				cards.add(new Card(ranks[a], suit, values[a]));
 			}
 		}
+		this.size = cards.size();
 	}
 
 
@@ -53,17 +58,17 @@ public class Deck {
 	 * Accesses the number of undealt cards in this deck.
 	 * @return the number of undealt cards in this deck.
 	 */
-	//public int size() {
-	//	return this.size = cards.size();
-	//}
+	public int size() {
+		return this.size = cards.size();
+	}
 
 	/**
 	 * Randomly permute the given collection of cards
 	 * and reset the size to represent the entire deck.
 	 */
-	//public void shuffle() {
-	//	/* *** TO BE IMPLEMENTED IN ACTIVITY 4 *** */
-	//}
+	public void shuffle() {
+		/* *** TO BE IMPLEMENTED IN ACTIVITY 4 *** */
+	}
 
 	/**
 	 * Deals a card from this deck.
@@ -74,8 +79,8 @@ public class Deck {
 		if(isEmpty()) {
 			return null;
 		}else {
-			Card returnCard = cards.get(size);
 			size--;
+			Card returnCard = cards.get(size);
 			return returnCard;
 		}
 	}
