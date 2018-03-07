@@ -5,6 +5,12 @@ import java.util.Random;
  */
 public class Shuffler {
 
+	/*
+	 * Name: Jules Petit
+	 * Block: E
+	 * Activity: 3
+	 */
+	
 	/**
 	 * The number of consecutive shuffle steps to be performed in each call
 	 * to each sorting procedure.
@@ -14,7 +20,7 @@ public class Shuffler {
 	/**
 	 * The number of values to shuffle.
 	 */
-	private static final int VALUE_COUNT = 52;
+	private static final int VALUE_COUNT = 4;
 
 	/**
 	 * Tests shuffling methods.

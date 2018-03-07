@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Random;
 import java.util.ArrayList;
 
 /**
@@ -8,10 +9,6 @@ import java.util.ArrayList;
  */
 public class Deck {
 
-	/*
-	 * Name: Jules Petit
-	 * Block: E
-	 */
 	/**
 	 * cards contains all the cards in the deck.
 	 */
@@ -35,14 +32,13 @@ public class Deck {
 	 */
 	public Deck(String[] ranks, String[] suits, int[] values) {
 		cards = new ArrayList<Card>();
-		System.out.println("Ranks size: " + ranks.length);
-		for(int a = 0; a < ranks.length; a++) {
-			for(String suit : suits) {
-				System.out.println("Cards Size: " + cards.size() + " | Suit Value: " + suit + " | Rank Value: " + ranks[a] + " | Value: " + values[a] + " | A: " + a);
-				cards.add(new Card(ranks[a], suit, values[a]));
+		for (int j = 0; j < ranks.length; j++) {
+			for (String suitString : suits) {
+				cards.add(new Card(ranks[j], suitString, values[j]));
 			}
 		}
-		this.size = cards.size();
+		size = cards.size();
+		shuffle();
 	}
 
 
@@ -51,7 +47,7 @@ public class Deck {
 	 * @return true if this deck is empty, false otherwise.
 	 */
 	public boolean isEmpty() {
-		return cards.size() == 0;
+		return size == 0;
 	}
 
 	/**
@@ -59,7 +55,7 @@ public class Deck {
 	 * @return the number of undealt cards in this deck.
 	 */
 	public int size() {
-		return this.size = cards.size();
+		return size;
 	}
 
 	/**
@@ -67,7 +63,13 @@ public class Deck {
 	 * and reset the size to represent the entire deck.
 	 */
 	public void shuffle() {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 4 *** */
+		for(int a = cards.size() - 1; a > 0; a--) {
+			Random rng = new Random();
+			int r = rng.nextInt(a);
+			Card hold = cards.get(a);
+			cards.set(a, cards.get(r));
+			cards.set(r, hold);
+		}
 	}
 
 	/**
@@ -76,13 +78,12 @@ public class Deck {
 	 *         previously dealt.
 	 */
 	public Card deal() {
-		if(isEmpty()) {
+		if (isEmpty()) {
 			return null;
-		}else {
-			size--;
-			Card returnCard = cards.get(size);
-			return returnCard;
 		}
+		size--;
+		Card c = cards.get(size);
+		return c;
 	}
 
 	/**
