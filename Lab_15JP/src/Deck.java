@@ -36,8 +36,8 @@ public class Deck {
 				cards.add(new Card(ranks[j], suitString, values[j]));
 			}
 		}
+		size = cards.size();
 		shuffle();
-		this.size = cards.size();
 	}
 
 
@@ -82,7 +82,8 @@ public class Deck {
 		if (isEmpty()) {
 			return null;
 		}
-		Card c = cards.get(--size);
+		size--;
+		Card c = cards.get(size);
 		return c;
 	}
 
