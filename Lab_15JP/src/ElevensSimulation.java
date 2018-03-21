@@ -7,7 +7,7 @@ public class ElevensSimulation {
 	/**
 	 * The number of games of Elevens to play.
 	 */
-	private static final int GAMES_TO_PLAY = 1;
+	private static final int GAMES_TO_PLAY = 100;
 
 	/**
 	 * Flag used to control debugging print statements.
@@ -25,16 +25,19 @@ public class ElevensSimulation {
 		for (int k = 0; k < GAMES_TO_PLAY; k++) {
 			if (I_AM_DEBUGGING) {
 				System.out.println(board);
+				System.out.println("Size: " + board.deckSize());
 			}
 			while (board.playIfPossible()) {
 				if (I_AM_DEBUGGING) {
 					System.out.println(board);
+					System.out.println("Size: " + board.deckSize());
 				}
 			}
 			if (board.gameIsWon()) {
 				wins++;
 			}
 			board.newGame();
+			System.out.println("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
 		}
 
 		double percentWon = (int)(1000.0 * wins / GAMES_TO_PLAY + 0.5) / 10.0;
