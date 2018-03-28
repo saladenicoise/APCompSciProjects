@@ -2,7 +2,6 @@ public abstract class Employee {
 
 	private String employeeId = "";
 	private String employeeName = "";
-	private double hourlyRate = 0;
 	
 	/**
 	 * Creates a new employee
@@ -10,10 +9,9 @@ public abstract class Employee {
 	 * @param name Employee Name
 	 * @param rate Employee's pay
 	 */
-	public Employee(String id, String name, double rate) {
+	public Employee(String id, String name) {
 		this.employeeId = id;
 		this.employeeName = name;
-		this.hourlyRate = rate;
 	}
 	
 	/**
@@ -42,22 +40,6 @@ public abstract class Employee {
 	}
 	
 	/**
-	 * Gets the hourly pay
-	 * @return hourly pay
-	 */
-	public double getPay() {
-		return this.hourlyRate;
-	}
-	
-	/**
-	 * Gives a raise to the employee
-	 * @param raise what to add to their pay
-	 */
-	public void giveRaise(double raise) {
-		this.hourlyRate += raise;
-	}
-	
-	/**
 	 * Abstract method to deal with paycheck
 	 * @return the paychecks
 	 */
@@ -68,7 +50,7 @@ public abstract class Employee {
 	 */
 	@Override
 	public String toString() {
-		return "Employee Id: " + this.employeeId + ", Employee Name: " + this.employeeName + ", Current Hourly Pay: " + this.hourlyRate;
+		return "Employee Id: " + this.employeeId + ", Employee Name: " + this.employeeName;
 	}
 
 }
