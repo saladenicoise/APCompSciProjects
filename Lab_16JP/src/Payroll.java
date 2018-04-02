@@ -17,7 +17,7 @@ public class Payroll {
 	public static void main(String[] args) throws notValidEmployeeTypeException, notValidMenuOptionException {
 		Scanner menuChoice = new Scanner(System.in);
 		int choice = 0;
-		while(choice != 6) {
+		while(choice != 7) {
 			System.out.println();
 			System.out.println("Welcome to payroll system v 1.0");
 			System.out.println("-------------------------------");
@@ -26,7 +26,8 @@ public class Payroll {
 			System.out.println("3. Remove an Employee");
 			System.out.println("4. Update hourly worker pay");
 			System.out.println("5. Calculate total payroll");
-			System.out.println("6. Quit");
+			System.out.println("6. Access Employee Record");
+			System.out.println("7. Quit");
 			System.out.println("-------------------------------");
 			System.out.print("Choice: ");
 			try {
@@ -34,8 +35,8 @@ public class Payroll {
 			}catch(InputMismatchException e) {
 				notValidMenuOptionException error = new notValidMenuOptionException("Incorrect Menu Option. Please relaunch");
 				error.printStackTrace();
-				break;
 			}
+			choice = 0;
 			if(choice == 1) {
 				displayPayrollInfo();
 			}else if(choice == 2) {
@@ -49,6 +50,11 @@ public class Payroll {
 				updateEmployeeHours();
 			}else if(choice == 5) {
 				calculateTotalPayroll();
+			}else if(choice == 6) {
+				System.out.println("Enter employee Id: ");
+				Scanner id = new Scanner(System.in);
+				String idVar = id.nextLine();
+				accessEmployeeRecord(idVar);
 			}
 		}
 		System.out.println("Goodbye!");
@@ -72,7 +78,7 @@ public class Payroll {
 			String id = userInput.nextLine();
 			System.out.println("Current Pay: ");
 			double currPay = input.nextDouble();
-			HourlyEmployee employee = new HourlyEmployee(name, id);
+			HourlyEmployee employee = new HourlyEmployee(name, id, employeeType);
 			System.out.println("How many hours as employee \"" + name + "\" worked? ");
 			double hoursWorked = input.nextDouble();
 			employee.setWorkHours(hoursWorked);
@@ -83,7 +89,7 @@ public class Payroll {
 			String name = userInput.nextLine();
 			System.out.println("Employee ID: ");
 			String id = userInput.nextLine();
-			SalariedEmployee employee = new SalariedEmployee(name, id);
+			SalariedEmployee employee = new SalariedEmployee(name, id, employeeType);
 			System.out.println("Current Annual Salary: ");
 			double currSalary = input.nextDouble();
 			employee.setAnnualSalary(currSalary);
@@ -125,7 +131,7 @@ public class Payroll {
 				String name = currEmployee.getEmployeeName();
 				System.out.println("How many hours has employee \"" + name + "\" worked: ");
 				double workHours = userInput2.nextDouble();
-				HourlyEmployee employee = new HourlyEmployee(name, id);
+				HourlyEmployee employee = new HourlyEmployee(name, id, "hourly");
 				employee.setWorkHours(workHours);
 				payroll.set(counter, employee);
 			}
@@ -136,6 +142,20 @@ public class Payroll {
 	 * Display Payroll
 	 */
 	public static void displayPayrollInfo() {
+		ArrayList<Employee> hourlySort = new ArrayList<Employee>();
+		ArrayList<Employee> salariedSort = new ArrayList<Employee>();
+		for(Employee e : payroll) {
+			if(e.getEmployeeType().equals("hourly")) {
+				hourlySort.add(e);
+			}else if(e.getEmployeeType().equals("salaried")) {
+				salariedSort.add(e);
+			}
+			Collections.sort(hourlySort, new PayrollComparator());
+			Collections.sort(salariedSort, new PayrollComparator());
+		}
+		payroll.clear();
+		payroll.addAll(hourlySort);
+		payroll.addAll(salariedSort);
 		if(payroll.size() > 0) {
 			for(Employee e : payroll) {
 				System.out.println(e.toString());
@@ -155,5 +175,13 @@ public class Payroll {
 			total += e.paycheck();
 		}
 		System.out.println("Total Weekly pay for the company is: " + total + "$");
+	}
+	
+	public static void accessEmployeeRecord(String id) {
+		for(Employee e : payroll) {
+			if(e.getEmployeeId().equals(id)) {
+				e.toString();
+			}
+		}
 	}
 }

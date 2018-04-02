@@ -9,8 +9,8 @@ public class SalariedEmployee extends Employee{
 	 * @param name The name
 	 * @param rate The rate of pay
 	 */
-	public SalariedEmployee(String id, String name) {
-		super(name, id);
+	public SalariedEmployee(String id, String name, String empType) {
+		super(name, id, empType);
 	}
 
 	/**
@@ -34,7 +34,7 @@ public class SalariedEmployee extends Employee{
 	 */
 	@Override
 	public String toString() {
-		return "Employee Name: " + getEmployeeName() + ", Employee Id: " + getEmployeeId() +", Employee Annual Salary: " + this.annualSalary + ", Weekly Employee Pay: " + paycheck();
+		return "Employee Type: " + "hourly " + ", Employee Name: " + getEmployeeName() + ", Employee Id: " + getEmployeeId() +", Employee Annual Salary: " + this.annualSalary + ", Weekly Employee Pay: " + paycheck();
 	}
 
 	

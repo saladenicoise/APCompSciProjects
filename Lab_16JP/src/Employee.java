@@ -2,16 +2,17 @@ public abstract class Employee {
 
 	private String employeeId = "";
 	private String employeeName = "";
+	private String employeeType = "";
 	
 	/**
 	 * Creates a new employee
 	 * @param id Employee Id
 	 * @param name Employee Name
-	 * @param rate Employee's pay
 	 */
-	public Employee(String id, String name) {
+	public Employee(String id, String name, String type) {
 		this.employeeId = id;
 		this.employeeName = name;
+		this.employeeType = type;
 	}
 	
 	/**
@@ -40,6 +41,14 @@ public abstract class Employee {
 	}
 	
 	/**
+	 * Gets the employee type
+	 * @return employee type
+	 */
+	public String getEmployeeType() {
+		return this.employeeType;
+	}
+	
+	/**
 	 * Abstract method to deal with paycheck
 	 * @return the paychecks
 	 */
@@ -50,7 +59,7 @@ public abstract class Employee {
 	 */
 	@Override
 	public String toString() {
-		return "Employee Id: " + this.employeeId + ", Employee Name: " + this.employeeName;
+		return "Employee Type: " + this.employeeType + ", Employee Id: " + this.employeeId + ", Employee Name: " + this.employeeName;
 	}
 
 }
