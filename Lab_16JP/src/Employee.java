@@ -1,7 +1,20 @@
 public abstract class Employee {
 
+	/*
+	 * Name: Jules Petit
+	 * Block: E
+	 */
+	/**
+	 * Contains Employee Id as a string
+	 */
 	private String employeeId = "";
+	/**
+	 * Contains Employee Name
+	 */
 	private String employeeName = "";
+	/**
+	 * Contains Employee Type
+	 */
 	private String employeeType = "";
 	
 	/**
@@ -47,6 +60,12 @@ public abstract class Employee {
 	public String getEmployeeType() {
 		return this.employeeType;
 	}
+	
+	/**
+	 * Abstract method to give a raise to employees
+	 * @param raise the raise to add
+	 */
+	public abstract void giveRaise(double raise);
 	
 	/**
 	 * Abstract method to deal with paycheck

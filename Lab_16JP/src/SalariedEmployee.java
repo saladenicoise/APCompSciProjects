@@ -22,6 +22,15 @@ public class SalariedEmployee extends Employee{
 	}
 	
 	/**
+	 * Give a raise
+	 * @param raise to add
+	 */
+	@Override
+	public void giveRaise(double raise) {
+		this.annualSalary += raise;
+	}
+	
+	/**
 	 * Calculates the paycheck for the employee
 	 */
 	@Override

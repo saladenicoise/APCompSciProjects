@@ -17,26 +17,25 @@ public class Payroll {
 	public static void main(String[] args) throws notValidEmployeeTypeException, notValidMenuOptionException {
 		Scanner menuChoice = new Scanner(System.in);
 		int choice = 0;
-		while(choice != 7) {
+		while(choice != 6) {
 			System.out.println();
 			System.out.println("Welcome to payroll system v 1.0");
 			System.out.println("-------------------------------");
 			System.out.println("1. Display Payroll Information");
 			System.out.println("2. Add an Employee");
 			System.out.println("3. Remove an Employee");
-			System.out.println("4. Update hourly worker pay");
-			System.out.println("5. Calculate total payroll");
-			System.out.println("6. Access Employee Record");
-			System.out.println("7. Quit");
+			System.out.println("4. Calculate total payroll");
+			System.out.println("5. Access Employee Record");
+			System.out.println("6. Quit");
 			System.out.println("-------------------------------");
 			System.out.print("Choice: ");
 			try {
-			choice = menuChoice.nextInt();
+				choice = menuChoice.nextInt();
 			}catch(InputMismatchException e) {
 				notValidMenuOptionException error = new notValidMenuOptionException("Incorrect Menu Option. Please relaunch");
 				error.printStackTrace();
 			}
-			choice = 0;
+			//choice = 0;
 			if(choice == 1) {
 				displayPayrollInfo();
 			}else if(choice == 2) {
@@ -47,10 +46,8 @@ public class Payroll {
 			}else if(choice == 3) {
 				deleteEmployee();
 			}else if(choice == 4) {
-				updateEmployeeHours();
-			}else if(choice == 5) {
 				calculateTotalPayroll();
-			}else if(choice == 6) {
+			}else if(choice == 5) {
 				System.out.println("Enter employee Id: ");
 				Scanner id = new Scanner(System.in);
 				String idVar = id.nextLine();
@@ -68,6 +65,7 @@ public class Payroll {
 	 */
 
 	public static void addEmployee(String employeeType) throws notValidEmployeeTypeException{
+		boolean sameId = false;
 		employeeType.toLowerCase();
 		Scanner userInput = new Scanner(System.in);
 		Scanner input = new Scanner(System.in);
@@ -76,24 +74,40 @@ public class Payroll {
 			String name = userInput.nextLine();
 			System.out.println("Employee ID: ");
 			String id = userInput.nextLine();
-			System.out.println("Current Pay: ");
-			double currPay = input.nextDouble();
-			HourlyEmployee employee = new HourlyEmployee(name, id, employeeType);
-			System.out.println("How many hours as employee \"" + name + "\" worked? ");
-			double hoursWorked = input.nextDouble();
-			employee.setWorkHours(hoursWorked);
-			employee.setHourlyPay(currPay);
-			payroll.add(employee);
+			for(Employee e : payroll) {
+				if(e.getEmployeeId().equals(id)) {
+					System.out.println("Error: Employee Id already exists");
+					sameId = true;
+				}
+			}
+			if(!sameId) {
+				System.out.println("Current Pay: ");
+				double currPay = input.nextDouble();
+				HourlyEmployee employee = new HourlyEmployee(name, id, employeeType);
+				System.out.println("How many hours as employee \"" + name + "\" worked? ");
+				double hoursWorked = input.nextDouble();
+				employee.setWorkHours(hoursWorked);
+				employee.setHourlyPay(currPay);
+				payroll.add(employee);
+			}
 		}else if(employeeType.equals("salaried")) {
 			System.out.println("Name of employee: ");
 			String name = userInput.nextLine();
 			System.out.println("Employee ID: ");
 			String id = userInput.nextLine();
-			SalariedEmployee employee = new SalariedEmployee(name, id, employeeType);
-			System.out.println("Current Annual Salary: ");
-			double currSalary = input.nextDouble();
-			employee.setAnnualSalary(currSalary);
-			payroll.add(employee);
+			for(Employee e : payroll) {
+				if(e.getEmployeeId().equals(id)) {
+					System.out.println("Error: Employee Id already exists");
+					sameId = true;
+				}
+			}
+			if(!sameId) {
+				SalariedEmployee employee = new SalariedEmployee(name, id, employeeType);
+				System.out.println("Current Annual Salary: ");
+				double currSalary = input.nextDouble();
+				employee.setAnnualSalary(currSalary);
+				payroll.add(employee);
+			}
 		}else {
 			throw new notValidEmployeeTypeException("Incorect Employee Type");
 		}
@@ -118,12 +132,10 @@ public class Payroll {
 	/**
 	 * Update hourly employee hours
 	 */
-	public static void updateEmployeeHours() {
+	public static void updateEmployeeHours(String id) {
 		Scanner userInput = new Scanner(System.in);
 		Scanner userInput2 = new Scanner(System.in);
 		int counter = 0;
-		System.out.println("Employee Id: ");
-		String id = userInput.nextLine();
 		for(Iterator<Employee> e = payroll.iterator(); e.hasNext();) {
 			Employee currEmployee = e.next();
 			counter++;
@@ -176,11 +188,47 @@ public class Payroll {
 		}
 		System.out.println("Total Weekly pay for the company is: " + total + "$");
 	}
-	
-	public static void accessEmployeeRecord(String id) {
+
+	public static void accessEmployeeRecord(String id) throws notValidMenuOptionException {
+		int choice = 0;
+		boolean found = false;
+		Employee currEmployee = null;
+		Scanner menu = new Scanner(System.in);
 		for(Employee e : payroll) {
 			if(e.getEmployeeId().equals(id)) {
-				e.toString();
+				currEmployee = e;
+				found = true;
+			}else {
+				found = false;
+			}
+		}
+		if(found == false) {
+			System.out.println("No employee with that id exists.");
+		}
+		while(choice != 4 && found) {
+			System.out.println("1. Give raise to employee");
+			System.out.println("2. Update Employee Name");
+			System.out.println("3. Update Employee Hours");
+			System.out.println("4. Exit Submenu");
+			System.out.println("Choice: ");
+			choice = menu.nextInt();
+			if(choice == 1) {
+				/*
+				 * If the pay was 20$ before and the user adds a 2$ raise, the pay will no be 22$
+				 */
+				System.out.println("What is the amount to be added to the employee's pay: ");
+				Scanner raiseScanner = new Scanner(System.in);
+				double raise = raiseScanner.nextDouble();
+				currEmployee.giveRaise(raise);
+			}else if(choice == 2) {
+				System.out.println("What is the employee's new name: ");
+				Scanner name = new Scanner(System.in);
+				String newName = name.nextLine();
+				currEmployee.changeEmployeeName(newName);
+			}else if(choice == 3) {
+				updateEmployeeHours(id);
+			}else if(choice != 4) {
+				throw new notValidMenuOptionException("Invalid Menu Option");
 			}
 		}
 	}

@@ -1,7 +1,17 @@
 
 public class HourlyEmployee extends Employee{
 
+	/*
+	 * Name: Jules Petit
+	 * Block: E
+	 */
+	/**
+	 * How many hours the employee has worked. 
+	 */
 	private double workHours = 0;
+	/**
+	 * The employee's current pay
+	 */
 	private double hourlyPay = 0;
 	/**
 	 * Creates a new a hourly employee
@@ -31,10 +41,19 @@ public class HourlyEmployee extends Employee{
 	
 	/**
 	 * Gets the hourly pay of the employee
-	 * @return
+	 * @return hourly
 	 */
 	public double getPay() {
 		return this.hourlyPay;
+	}
+	
+	/**
+	 * Function to give the raise
+	 * @param 
+	 */
+	@Override
+	public void giveRaise(double raise) {
+		this.hourlyPay += raise;
 	}
 
 	/**
