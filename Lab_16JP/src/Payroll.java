@@ -141,7 +141,7 @@ public class Payroll {
 		double work = userInput.nextDouble();
 		for(Employee e : payroll) {
 			if(e.getEmployeeId().equals(id)) {
-				HourlyEmployee employee = new HourlyEmployee(e.getEmployeeName(), e.getEmployeeId(), "hourly");
+				HourlyEmployee employee = (HourlyEmployee) e;
 				int employeeIndex = payroll.indexOf(e);
 				employee.setWorkHours(work);
 				payroll.set(employeeIndex, employee);
@@ -198,6 +198,7 @@ public class Payroll {
 			if(e.getEmployeeId().equals(id)) {
 				currEmployee = e;
 				found = true;
+				break;
 			}else {
 				found = false;
 			}

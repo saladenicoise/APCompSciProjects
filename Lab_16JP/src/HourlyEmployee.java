@@ -62,9 +62,15 @@ public class HourlyEmployee extends Employee{
 	@Override
 	public double paycheck() {
 		if(workHours <= 40) {
-			return workHours * getPay(); 
+			return workHours * getPay();
 		}else {
-			return (workHours * getPay()) + ((workHours-40)*(1.5*getPay()));
+			double balance = (workHours-(workHours-40)) * getPay();
+			//System.out.println("Debug: bal for 40 hours: " + balance);
+			double sal = 1.5 * getPay();
+			//System.out.println("Debug: overtime pay: " + sal);
+			double balance2 = (workHours-40) * sal;
+			//System.out.println("Debug: Overtime bal: " + balance2);
+			return balance + balance2;
 		}
 	}
 	
