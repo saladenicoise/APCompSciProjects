@@ -3,6 +3,7 @@ public class SalariedEmployee extends Employee{
 
 	private double annualSalary = 0;
 	
+	
 	/**
 	 * Creates a new Salaried employee
 	 * @param id The id
@@ -43,7 +44,7 @@ public class SalariedEmployee extends Employee{
 	 */
 	@Override
 	public String toString() {
-		return "Employee Type: " + "hourly " + ", Employee Name: " + getEmployeeName() + ", Employee Id: " + getEmployeeId() +", Employee Annual Salary: " + this.annualSalary + ", Weekly Employee Pay: " + paycheck();
+		return "Employee Type: " + getEmployeeType() + ", Employee Name: " + getEmployeeName() + ", Employee Id: " + getEmployeeId() +", Employee Annual Salary: " + this.annualSalary + ", Weekly Employee Pay: " + paycheck();
 	}
 
 	

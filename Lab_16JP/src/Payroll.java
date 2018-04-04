@@ -14,7 +14,7 @@ public class Payroll {
 	 * @throws notValidEmployeeTypeException not a valid employee type
 	 * @throws InterruptedException 
 	 */
-	public static void main(String[] args) throws notValidEmployeeTypeException, notValidMenuOptionException {
+	public static void main(String[] args) throws notValidEmployeeTypeException, notValidMenuOptionException, InterruptedException {
 		Scanner menuChoice = new Scanner(System.in);
 		int choice = 0;
 		while(choice != 6) {
@@ -34,6 +34,8 @@ public class Payroll {
 			}catch(InputMismatchException e) {
 				notValidMenuOptionException error = new notValidMenuOptionException("Incorrect Menu Option. Please relaunch");
 				error.printStackTrace();
+				Thread.sleep(100);
+				break;
 			}
 			//choice = 0;
 			if(choice == 1) {
@@ -83,7 +85,7 @@ public class Payroll {
 			if(!sameId) {
 				System.out.println("Current Pay: ");
 				double currPay = input.nextDouble();
-				HourlyEmployee employee = new HourlyEmployee(name, id, employeeType);
+				HourlyEmployee employee = new HourlyEmployee(name, id, "hourly");
 				System.out.println("How many hours as employee \"" + name + "\" worked? ");
 				double hoursWorked = input.nextDouble();
 				employee.setWorkHours(hoursWorked);
@@ -102,11 +104,11 @@ public class Payroll {
 				}
 			}
 			if(!sameId) {
-				SalariedEmployee employee = new SalariedEmployee(name, id, employeeType);
+				SalariedEmployee employee2 = new SalariedEmployee(name, id, "salaried");
 				System.out.println("Current Annual Salary: ");
 				double currSalary = input.nextDouble();
-				employee.setAnnualSalary(currSalary);
-				payroll.add(employee);
+				employee2.setAnnualSalary(currSalary);
+				payroll.add(employee2);
 			}
 		}else {
 			throw new notValidEmployeeTypeException("Incorect Employee Type");
@@ -135,17 +137,14 @@ public class Payroll {
 	public static void updateEmployeeHours(String id) {
 		Scanner userInput = new Scanner(System.in);
 		Scanner userInput2 = new Scanner(System.in);
-		int counter = 0;
-		for(Iterator<Employee> e = payroll.iterator(); e.hasNext();) {
-			Employee currEmployee = e.next();
-			counter++;
-			if(currEmployee.getEmployeeId().equals(id)) {
-				String name = currEmployee.getEmployeeName();
-				System.out.println("How many hours has employee \"" + name + "\" worked: ");
-				double workHours = userInput2.nextDouble();
-				HourlyEmployee employee = new HourlyEmployee(name, id, "hourly");
-				employee.setWorkHours(workHours);
-				payroll.set(counter, employee);
+		System.out.println("How many hours has the employee worked?");
+		double work = userInput.nextDouble();
+		for(Employee e : payroll) {
+			if(e.getEmployeeId().equals(id)) {
+				HourlyEmployee employee = new HourlyEmployee(e.getEmployeeName(), e.getEmployeeId(), "hourly");
+				int employeeIndex = payroll.indexOf(e);
+				employee.setWorkHours(work);
+				payroll.set(employeeIndex, employee);
 			}
 		}
 	}
@@ -193,6 +192,7 @@ public class Payroll {
 		int choice = 0;
 		boolean found = false;
 		Employee currEmployee = null;
+		Employee currEmployee2 = null;
 		Scanner menu = new Scanner(System.in);
 		for(Employee e : payroll) {
 			if(e.getEmployeeId().equals(id)) {
@@ -206,6 +206,13 @@ public class Payroll {
 			System.out.println("No employee with that id exists.");
 		}
 		while(choice != 4 && found) {
+			for(Employee e : payroll) {
+				if(e.getEmployeeId().equals(id)) {
+					currEmployee2 = e;
+					break;
+				}
+			}
+			System.out.println("Current Employee: " + currEmployee2.toString());
 			System.out.println("1. Give raise to employee");
 			System.out.println("2. Update Employee Name");
 			System.out.println("3. Update Employee Hours");
@@ -226,7 +233,11 @@ public class Payroll {
 				String newName = name.nextLine();
 				currEmployee.changeEmployeeName(newName);
 			}else if(choice == 3) {
-				updateEmployeeHours(id);
+				if(currEmployee.getEmployeeType().equals("salaried")) {
+					System.out.println("Error: Cannot change hours for a salaried employee");
+				}else {
+					updateEmployeeHours(id);
+				}
 			}else if(choice != 4) {
 				throw new notValidMenuOptionException("Invalid Menu Option");
 			}

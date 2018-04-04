@@ -64,8 +64,7 @@ public class HourlyEmployee extends Employee{
 		if(workHours <= 40) {
 			return workHours * getPay(); 
 		}else {
-			workHours -= 40;
-			return workHours * (1.5 * getPay());
+			return (workHours * getPay()) + ((workHours-40)*(1.5*getPay()));
 		}
 	}
 	
@@ -74,7 +73,7 @@ public class HourlyEmployee extends Employee{
 	 */
 	@Override
 	public String toString() {
-		return "Employee Type: " + "hourly " + ", Employee Name: " + getEmployeeName() + ", Employee Id: " + getEmployeeId() + ", Hourly Pay: " + getPay() + ", Pay check: " + paycheck();
+		return "Employee Type: " + getEmployeeType() + ", Employee Name: " + getEmployeeName() + ", Employee Id: " + getEmployeeId() + ", Employee Hours: " + workHours + ", Hourly Pay: " + getPay() + ", Pay check: " + paycheck();
 	}
 
 }
