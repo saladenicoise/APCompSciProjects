@@ -58,7 +58,8 @@ public class GridCreator {
 		for(int a = randomAlph.size() - 1; a > 1; a--) {
 			grid[3][a] = randomAlph.remove(a);
 		}
-
+		grid[3][10] = randomAlph.remove(1);
+		grid[3][1] = randomAlph.remove(0);
 		//Return the completed random grid
 		return grid;
 	}
