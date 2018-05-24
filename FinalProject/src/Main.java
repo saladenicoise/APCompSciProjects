@@ -18,7 +18,9 @@ public class Main {
 		//FileUtil.printArrayToConsole(grid);
 		//System.out.println("What would you like to encode?: ");
 		//String encode = userIn.nextLine();
-		Encryption.EncryptFromFile("TestEncrypt", grid, 37421);
+		//Encryption.EncryptFromFile("TestEncrypt", grid, 37421);
+		//Encryption.EncryptFromText("apcomputerscience8", grid, 0);
+		Decryption.decryptFromText("534626138190528215018152/8.", grid, 37421);
 	}
 	
 }

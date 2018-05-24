@@ -12,6 +12,10 @@ public class GridCreator {
 	private static char[] rowLabel;
 	private static ArrayList<Character> alphabet;
 
+	/**
+	 * Creates a a fully random grid
+	 * @return a randomly generated grid
+	 */
 	public static char[][] CreateRandomGrid() {
 		grid = new char[4][11];
 		grid[0][0] = ' ';
@@ -64,6 +68,10 @@ public class GridCreator {
 		return grid;
 	}
 
+	/**
+	 * Generates the default given grid.
+	 * @return the default grid
+	 */
 	public static char[][] CreateDefaultGrid() {
 		char [][] grid = {{' ', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'},
 				{' ', 'E', 'T', 'A', 'O', ' ', 'N', ' ', 'R', 'I', 'S'},
@@ -72,6 +80,14 @@ public class GridCreator {
 		return grid;
 	}
 
+	/**
+	 * Checks if the given character is unique within the array
+	 * @param arr the array to look into
+	 * @param search what to look for
+	 * @param rowNum the number of the row
+	 * @param start the start position
+	 * @return true if unique, false otherwise
+	 */
 	public static boolean isUnique(char[][] arr, char search, int rowNum, int start) {
 		boolean isUnique = true;
 		for(int a = start; a < arr[rowNum].length - 1; a++) {
@@ -82,6 +98,10 @@ public class GridCreator {
 		return isUnique;
 	}
 
+	/**
+	 * Generates a random alphabet
+	 * @return a randomly generate ArrayList of the alphabet
+	 */
 	public static ArrayList<Character> randomAlphabet() {
 		alphabet = new ArrayList<Character>();
 		alphabet.add('B');

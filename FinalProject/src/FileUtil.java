@@ -5,6 +5,13 @@ public class FileUtil {
 	private static File file;
 	private static PrintWriter out;
 
+	/**
+	 * Prints the given grid to a file
+	 * @param arr the grid to output
+	 * @param userFileChoice the name of the file to output to
+	 * @throws IOException
+	 * @throws FileNotFoundException
+	 */
 	public static void OutputGridToFile(char[][] arr, String userFileChoice) throws IOException, FileNotFoundException {
 		String homeDir = System.getProperty("user.home");
 		file = new File(homeDir + "/Desktop/" + userFileChoice + ".txt");
@@ -24,6 +31,12 @@ public class FileUtil {
 		System.out.println("Your grid has been saved to: " + homeDir + "/Desktop/" + userFileChoice + ".txt");
 	}
 
+	/**
+	 * Loads a grid from a given file
+	 * @param fileName name of the file to look for grid
+	 * @return
+	 * @throws FileNotFoundException
+	 */
 	public static char[][] loadGridFromFile(String fileName) throws FileNotFoundException {
 		String homeDir = System.getProperty("user.home");
 		file = new File(homeDir + "/Desktop/" + fileName + ".txt");
@@ -44,6 +57,10 @@ public class FileUtil {
 		return grid;
 	}
 	
+	/**
+	 * Prints the grid to the console
+	 * @param arr the grid to print
+	 */
 	public static void printArrayToConsole(char[][] arr) {
 		for(char [] c : arr) {
 			for(char c1 : c) {

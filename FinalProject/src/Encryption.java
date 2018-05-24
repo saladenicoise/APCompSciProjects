@@ -6,6 +6,13 @@ public class Encryption {
 	private static BufferedReader f;
 	private static char[] numDigits;
 
+	/**
+	 * Encrypts a string from a given grid
+	 * @param text the text to encrypt
+	 * @param grid the grid to encrypt with
+	 * @param modAdd the modular addition number for added security(0 if none)
+	 * @throws IOException
+	 */
 	public static void EncryptFromText(String text, char[][] grid, int modAdd) throws IOException{
 		if(modAdd != 0) {
 			numDigits = getDigits(modAdd);
@@ -22,6 +29,7 @@ public class Encryption {
 			System.out.println("Created new file at: " + file.toString());
 		}
 		PrintWriter out = new PrintWriter(file);
+		boolean loopOnlyOnce = false;
 		for(int c = 0; c < textChars.length; c++) {
 			for(int a = 1; a < grid.length; a++) {
 				for(int b = 1; b < grid[0].length; b++) {
@@ -51,6 +59,9 @@ public class Encryption {
 								d += 2;
 							}
 						}
+					}else if((Character.toString(textChars[c]).equals("0") || Character.toString(textChars[c]).equals("1") || Character.toString(textChars[c]).equals("2") || Character.toString(textChars[c]).equals("3") || Character.toString(textChars[c]).equals("4") || Character.toString(textChars[c]).equals("5") || Character.toString(textChars[c]).equals("6") || Character.toString(textChars[c]).equals("7") || Character.toString(textChars[c]).equals("8") || Character.toString(textChars[c]).equals("9")) && loopOnlyOnce == false) {//Is a digit, therefore we encode it differently
+						encoded += "/" + Character.toString(textChars[c]) + ".";
+						loopOnlyOnce = true;
 					}
 				}
 			}
@@ -59,7 +70,15 @@ public class Encryption {
 		out.println(encoded);
 		out.close();
 	}
-
+	
+	/**
+	 * Encrypts a file using a given grid 
+	 * @param fileName the name of the file to encrypt
+	 * @param grid the grid to use
+	 * @param modAdd the number for modular addition
+	 * @throws IOException
+	 * @throws FileNotFoundException
+	 */
 	public static void EncryptFromFile(String fileName, char[][] grid, int modAdd) throws IOException, FileNotFoundException {
 		String homeDir = System.getProperty("user.home");
 		file = new File(homeDir + "/Desktop/" + fileName + ".txt");
@@ -117,13 +136,24 @@ public class Encryption {
 		out.close();
 	}
 
-
+	/**
+	 * Gets all the digits of the given mod
+	 * @param a
+	 * @return
+	 */
 	public static char[] getDigits(int a ) {
 		String num = String.valueOf(a);
 		char[] digits = num.toCharArray();
 		return digits;
 	}
 
+	/**
+	 * Performs modular addition
+	 * @param a the first char
+	 * @param b the second char
+	 * @param modAdd the modAdd
+	 * @return the value of the mod addition
+	 */
 	public static String performModAdd(char a, char b, int modAdd) {
 		String reg = Character.toString(a);
 		String mod = Character.toString(b);
