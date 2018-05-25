@@ -11,7 +11,6 @@ public class Main {
 	private static char[][] grid;
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		grid = GridCreator.CreateDefaultGrid();
 		Scanner userIn = new Scanner(System.in);
 		Scanner menuIn = new Scanner(System.in);
 		int userChoice = 0;

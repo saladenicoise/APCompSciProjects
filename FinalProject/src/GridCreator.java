@@ -38,7 +38,7 @@ public class GridCreator {
 			}
 		}
 
-		//Generates randomed 2nd row of grid
+		//Randomize the spaces in commons
 		char[] commons = {'E', 'T', 'A', 'O', 'N', 'R', 'I', 'S'};
 		rowLabel = new char[2];
 		for(int a = 0; a < 2; a++) { //We ignore the first index since it is blank
@@ -78,10 +78,54 @@ public class GridCreator {
 	 * @return the default grid
 	 */
 	public static char[][] CreateDefaultGrid() {
-		char [][] grid = {{' ', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'},
-				{' ', 'E', 'T', 'A', 'O', ' ', 'N', ' ', 'R', 'I', 'S'},
-				{'4', 'B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M'},
-				{'6', 'P', 'Q', '/', 'U', 'V', 'W', 'X', 'Y', '.', 'Z'}};
+		char[][] grid  = new char[4][11];
+		int num = 0;
+		grid[0][0] = ' ';
+		grid[1][0] = ' ';
+		rng = new Random();
+		for(int a = 1; a < 10; a++) {
+			grid[0][a] = Character.valueOf(String.valueOf(num).charAt(0)); 
+			num++;
+		}
+		//Randomize the spaces in commons
+		char[] commons = {'E', 'T', 'A', 'O', 'N', 'R', 'I', 'S'};
+		rowLabel = new char[2];
+		for(int a = 0; a < 2; a++) { //We ignore the first index since it is blank
+			int column = rng.nextInt(grid[1].length - 1);
+			if(grid[1][column] != ' ') {
+				grid[1][column] = ' ';
+				rowLabel[a] = grid[0][column];
+			}
+		}
+		int b = 0;
+		for(int a = 1; a < grid[1].length; a++) {
+			if(grid[1][a] != ' ') {
+				grid[1][a] = commons[b];
+				b++;
+			}
+		}
+		grid[2][0] = rowLabel[1];
+		grid[3][0] = rowLabel[0];
+		grid[2][1] = 'B';
+		grid[2][2] = 'C';
+		grid[2][3] = 'D';
+		grid[2][4] = 'F';
+		grid[2][5] = 'G';
+		grid[2][6] = 'H';
+		grid[2][7] = 'J';
+		grid[2][8] = 'K';
+		grid[2][9] = 'L';
+		grid[2][10] = 'M';
+		grid[3][1] = 'P';
+		grid[3][2] = 'Q';
+		grid[3][3] = '/';
+		grid[3][4] = 'U';
+		grid[3][5] = 'V';
+		grid[3][6] = 'W';
+		grid[3][7] = 'X';
+		grid[3][8] = 'Y';
+		grid[3][9] = '.';
+		grid[3][10] = 'Z';
 		return grid;
 	}
 

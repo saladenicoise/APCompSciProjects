@@ -9,8 +9,7 @@ import java.util.*;
 public class Decryption {
 
 	/* TODO:
-	 * 1. Ask Mr. Harris about extension
-	 * 2. If nth line to decode contains both numbers of row numbers it crashes
+	 * 1. Figure out double digit boolean math variables
 	 */
 	
 	
@@ -87,6 +86,7 @@ public class Decryption {
 		file = new File(homeDir + "/Desktop/" + fileName + ".txt");
 		File newFile = new File(homeDir + "/Desktop/" + "Decrypted" + fileName + ".txt");
 		f = new BufferedReader(new FileReader(file));
+		boolean doubleDig = false;
 		Scanner line = new Scanner(f);
 		PrintWriter out = new PrintWriter(new FileWriter(newFile, true));
 		System.out.println("Will be overwriting file: " + newFile.toString() + " with new encoded file");
@@ -106,12 +106,14 @@ public class Decryption {
 			for(int c = 0; c < textChars.length; c++) {
 				if(Character.toString(textChars[c]).toString().equals(key1) || Character.toString(textChars[c]).toString().equals(key2)) { //A pair
 					for(int b = 1; b < grid[0].length; b++) { //Col
-						if(Character.toString(textChars[c]).toString().equals(key1) && textChars[c+1] == grid[0][b]) {
+						if(Character.toString(textChars[c]).toString().equals(key1) && textChars[c+1] == grid[0][b] && doubleDig == false) {
 							decoded += Character.toString(grid[2][b]);
 							c++;
-						}else if(Character.toString(textChars[c]).toString().equals(key2) && textChars[c+1] == grid[0][b]) {
+							//doubleDig = true;
+						}else if(Character.toString(textChars[c]).toString().equals(key2) && textChars[c+1] == grid[0][b] && doubleDig == false) {
 							decoded += Character.toString(grid[3][b]);
 							c++;
+							//doubleDig = true;
 						}
 					}
 				}else if(textChars[c] == '/') {
