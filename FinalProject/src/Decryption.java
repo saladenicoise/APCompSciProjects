@@ -11,8 +11,8 @@ public class Decryption {
 	/* TODO:
 	 * 1. Figure out double digit boolean math variables
 	 */
-	
-	
+
+
 	private static File file;
 	private static BufferedReader f;
 	private static char[] numDigits;
@@ -86,7 +86,7 @@ public class Decryption {
 		file = new File(homeDir + "/Desktop/" + fileName + ".txt");
 		File newFile = new File(homeDir + "/Desktop/" + "Decrypted" + fileName + ".txt");
 		f = new BufferedReader(new FileReader(file));
-		boolean doubleDig = false;
+		boolean doubleLoop = false;
 		Scanner line = new Scanner(f);
 		PrintWriter out = new PrintWriter(new FileWriter(newFile, true));
 		System.out.println("Will be overwriting file: " + newFile.toString() + " with new encoded file");
@@ -104,25 +104,34 @@ public class Decryption {
 			String key2 = Character.valueOf(grid[3][0]).toString();
 			String decoded = "";
 			for(int c = 0; c < textChars.length; c++) {
+				doubleLoop = false;
 				if(Character.toString(textChars[c]).toString().equals(key1) || Character.toString(textChars[c]).toString().equals(key2)) { //A pair
 					for(int b = 1; b < grid[0].length; b++) { //Col
-						if(Character.toString(textChars[c]).toString().equals(key1) && textChars[c+1] == grid[0][b] && doubleDig == false) {
-							decoded += Character.toString(grid[2][b]);
-							c++;
-							//doubleDig = true;
-						}else if(Character.toString(textChars[c]).toString().equals(key2) && textChars[c+1] == grid[0][b] && doubleDig == false) {
-							decoded += Character.toString(grid[3][b]);
-							c++;
-							//doubleDig = true;
+						if(Character.toString(textChars[c]).toString().equals(key1)) {
+							if(textChars[c+1] == grid[0][b] && doubleLoop == false) {
+								decoded += Character.toString(grid[2][b]);
+								//System.out.println(decoded);
+								doubleLoop = true;
+								c++;
+							}
+						}else if(Character.toString(textChars[c]).toString().equals(key2)) {
+							if(textChars[c+1] == grid[0][b] && doubleLoop == false) {
+								decoded += Character.toString(grid[3][b]);
+								//System.out.println(decoded);
+								doubleLoop = true;
+								c++;
+							}
 						}
 					}
 				}else if(textChars[c] == '/') {
 					decoded += Character.toString(textChars[c+1]);
 					c += 2; // Adding 2 in order to ignore . at the the end
+					//System.out.println(decoded);
 				}else { //Not a pair therefore it is a common
 					for(int b = 1; b < grid[0].length; b++) {
 						if(textChars[c] == grid[0][b]) {
 							decoded += Character.toString(grid[1][b]);
+							//System.out.println(decoded);
 						}
 					}
 				}

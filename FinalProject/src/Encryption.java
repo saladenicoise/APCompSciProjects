@@ -42,30 +42,37 @@ public class Encryption {
 						if(a == 1) { //First row(commons E, T, A etc...)
 							if(modAdd == 0) {
 								encoded += Character.toString(grid[0][b]);
+								//System.out.println(encoded);
 							}else {
 								if(d == numDigits.length) {
 									d = 0;
 								}
 								encoded += performModAdd(grid[0][b], numDigits[d], modAdd);
+								//System.out.println("First row: " + encoded + " NumDig: " + numDigits[d]);
 								d++;
 							}
 						}else { //2nd or 3rd row
 							if(modAdd == 0) {
 								encoded += Character.toString(grid[a][0]) + Character.toString(grid[0][b]);	
+								//System.out.println(encoded);
 							}else {
 								if(d == numDigits.length) {
 									d = 0;
 								}
 								encoded += performModAdd(grid[a][0], numDigits[d], modAdd);
+								//System.out.println("2nd or 3rd Row pt1: " + encoded + " NumDig: " + numDigits[d]);
+								d++;
 								if(d == numDigits.length) {
 									d = 0;
 								}
-								encoded	+= performModAdd(grid[0][b], numDigits[d+1], modAdd);
-								d += 2;
+								encoded	+= performModAdd(grid[0][b], numDigits[d], modAdd);
+								//System.out.println("2nd or 3rd Row pt2: " + encoded + " NumDig: " + numDigits[d]);
+								d++;
 							}
 						}
 					}else if((Character.toString(textChars[c]).equals("0") || Character.toString(textChars[c]).equals("1") || Character.toString(textChars[c]).equals("2") || Character.toString(textChars[c]).equals("3") || Character.toString(textChars[c]).equals("4") || Character.toString(textChars[c]).equals("5") || Character.toString(textChars[c]).equals("6") || Character.toString(textChars[c]).equals("7") || Character.toString(textChars[c]).equals("8") || Character.toString(textChars[c]).equals("9")) && loopOnlyOnce == false) {//Is a digit, therefore we encode it differently
 						encoded += "/" + Character.toString(textChars[c]) + ".";
+						//System.out.println(encoded);
 						loopOnlyOnce = true;
 					}
 				}
@@ -113,30 +120,37 @@ public class Encryption {
 							if(a == 1) { //First row(commons E, T, A etc...)
 								if(modAdd == 0) {
 									encoded += Character.toString(grid[0][b]);
+									//System.out.println(encoded);
 								}else {
 									if(d == numDigits.length) {
 										d = 0;
 									}
 									encoded += performModAdd(grid[0][b], numDigits[d], modAdd);
+									//System.out.println(encoded);
 									d++;
 								}
 							}else { //2nd or 3rd row
 								if(modAdd == 0) {
 									encoded += Character.toString(grid[a][0]) + Character.toString(grid[0][b]);	
+									//System.out.println(encoded);
 								}else {
 									if(d == numDigits.length) {
 										d = 0;
 									}
 									encoded += performModAdd(grid[a][0], numDigits[d], modAdd);
+									//System.out.println(encoded);
 									if(d == numDigits.length) {
 										d = 0;
 									}
-									encoded	+= performModAdd(grid[0][b], numDigits[d+1], modAdd);
-									d += 2;
+									d++;
+									encoded	+= performModAdd(grid[0][b], numDigits[d], modAdd);
+									//System.out.println(encoded);
+									d++;
 								}
 							}
 						}else if((Character.toString(textChars[c]).equals("0") || Character.toString(textChars[c]).equals("1") || Character.toString(textChars[c]).equals("2") || Character.toString(textChars[c]).equals("3") || Character.toString(textChars[c]).equals("4") || Character.toString(textChars[c]).equals("5") || Character.toString(textChars[c]).equals("6") || Character.toString(textChars[c]).equals("7") || Character.toString(textChars[c]).equals("8") || Character.toString(textChars[c]).equals("9")) && loopOnlyOnce == false) {//Is a digit, therefore we encode it differently
 							encoded += "/" + Character.toString(textChars[c]) + ".";
+							//System.out.println(encoded);
 							loopOnlyOnce = true;
 						}
 					}
