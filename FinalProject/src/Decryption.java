@@ -1,10 +1,23 @@
 import java.io.*;
+//Author: Jules Petit | E Block
 import java.util.*;
+
+/**
+ * Decryption Class
+ * @author Jules Petit | E Block
+ */
 public class Decryption {
 
+	/* TODO:
+	 * 1. Ask Mr. Harris about extension
+	 * 2. If nth line to decode contains both numbers of row numbers it crashes
+	 */
+	
+	
 	private static File file;
 	private static BufferedReader f;
 	private static char[] numDigits;
+	//Author: Jules Petit | E Block
 
 	/**
 	 * Decrypts a given string with a given grid
@@ -14,7 +27,7 @@ public class Decryption {
 	 * @throws IOException
 	 */
 	public static void decryptFromText(String text, char[][] grid, int modAdd) throws IOException {
-		text = text.replace(" ", "").replace("/", "").replace(".", "").toUpperCase();
+		text = text.replace(" ", "").toUpperCase();
 		char[] textChars = text.toCharArray();
 		if(modAdd != 0) {
 			numDigits = getDigits(modAdd);
@@ -44,6 +57,9 @@ public class Decryption {
 						c++;
 					}
 				}
+			}else if(textChars[c] == '/') {
+				decoded += Character.toString(textChars[c+1]);
+				c += 2; // Adding 2 in order to ignore . at the the end
 			}else { //Not a pair therefore it is a common
 				for(int b = 1; b < grid[0].length; b++) {
 					if(textChars[c] == grid[0][b]) {
@@ -69,15 +85,16 @@ public class Decryption {
 	public static void decryptFromFile(String fileName, char[][] grid, int modAdd) throws IOException, FileNotFoundException {
 		String homeDir = System.getProperty("user.home");
 		file = new File(homeDir + "/Desktop/" + fileName + ".txt");
+		File newFile = new File(homeDir + "/Desktop/" + "Decrypted" + fileName + ".txt");
 		f = new BufferedReader(new FileReader(file));
 		Scanner line = new Scanner(f);
-		PrintWriter out = new PrintWriter(new FileWriter(file, true));
-		System.out.println("Will be overwriting file: " + homeDir + "/Desktop/" + fileName + ".txt with new encoded file");
+		PrintWriter out = new PrintWriter(new FileWriter(newFile, true));
+		System.out.println("Will be overwriting file: " + newFile.toString() + " with new encoded file");
 		out.println();
-		out.println("--------------Encrypted Message Below--------------");
+		out.println("--------------Decrypted Message Below--------------");
 		while(line.hasNextLine()) {
 			String curLine = line.nextLine();
-			curLine = curLine.replace(" ", "").replace("/", "").replace(".", "").toUpperCase();
+			curLine = curLine.replace(" ", "").toUpperCase();
 			char[] textChars = curLine.toCharArray();
 			if(modAdd != 0) {
 				numDigits = getDigits(modAdd);
@@ -97,9 +114,9 @@ public class Decryption {
 							c++;
 						}
 					}
-				}else if(textChars[c] == '/' && textChars[c+2] == '.') { // A digit
-					decoded += textChars[c+1];
-					c += 2;
+				}else if(textChars[c] == '/') {
+					decoded += Character.toString(textChars[c+1]);
+					c += 2; // Adding 2 in order to ignore . at the the end
 				}else { //Not a pair therefore it is a common
 					for(int b = 1; b < grid[0].length; b++) {
 						if(textChars[c] == grid[0][b]) {
@@ -132,17 +149,24 @@ public class Decryption {
 	 * @param modDigit what the current digit of the mod subtraction is(for multidigit)
 	 * @return
 	 */
-	public static char performModSub(char a, int modDigit) {
-		String decodedNum = "";
-		String aChar = Character.toString(a);
-		int aVal = Integer.parseInt(aChar);
-		for(int b = 0; b < 10; b++) {
-			if((modDigit + b)%10 == aVal) {
-				decodedNum = String.valueOf(b);
+	public static String performModSub(char a, int modDigit, boolean dig) {
+		String decoded = ""; 
+		if(dig == false) {
+			String decodedNum = "";
+			String aChar = Character.toString(a);
+			int aVal = Integer.parseInt(aChar);
+			for(int b = 0; b < 10; b++) {
+				if((modDigit + b)%10 == aVal) {
+					decodedNum = String.valueOf(b);
+				}
 			}
+			decoded = decodedNum;
+		}else {
+			decoded =  "/" + a + ".";
 		}
-		return decodedNum.charAt(0);
+		return decoded;
 	}
+
 
 	/**
 	 * Bashes out the decoded array given a mod addition
@@ -156,10 +180,18 @@ public class Decryption {
 			if(d == numDigits.length) {
 				d = 0;
 			}
-			//if(!(Character.toString(text[a]).equals("0") || Character.toString(text[a]).equals("1") || Character.toString(text[a]).equals("2") || Character.toString(text[a]).equals("3") || Character.toString(text[a]).equals("4") || Character.toString(text[a]).equals("5") || Character.toString(text[a]).equals("6") || Character.toString(text[a]).equals("7") || Character.toString(text[a]).equals("8") || Character.toString(text[a]).equals("9"))) {
-				decodedArray[a] = performModSub(text[a], Integer.parseInt(Character.toString(numDigits[d])));
+			if(!(text[a] == '/')) {
+				decodedArray[a] = performModSub(text[a], Integer.parseInt(Character.toString(numDigits[d])), false).charAt(0);
 				d++;
-			//}
+			}else {
+				String dig = performModSub(text[a+1], Integer.parseInt(Character.toString(numDigits[d])), true);
+				for(int b = 0; b < dig.length(); b++) {
+					decodedArray[a] = dig.charAt(b);
+					a += 1;
+				}
+				a -= 1;
+				d++;
+			}
 		}
 		return decodedArray;
 	}

@@ -1,6 +1,12 @@
 import java.io.*;
+//Author: Jules Petit | E Block
 import java.util.*;
 
+
+/**
+ * File Utility Class
+ * @author Jules Petit | E Block
+ */
 public class FileUtil {
 	private static File file;
 	private static PrintWriter out;
@@ -12,7 +18,7 @@ public class FileUtil {
 	 * @throws IOException
 	 * @throws FileNotFoundException
 	 */
-	public static void OutputGridToFile(char[][] arr, String userFileChoice) throws IOException, FileNotFoundException {
+	public static void outputGridToFile(char[][] arr, String userFileChoice) throws IOException, FileNotFoundException {
 		String homeDir = System.getProperty("user.home");
 		file = new File(homeDir + "/Desktop/" + userFileChoice + ".txt");
 		if(!file.exists()) {
@@ -28,7 +34,7 @@ public class FileUtil {
 			out.println();
 		}
 		out.close();
-		System.out.println("Your grid has been saved to: " + homeDir + "/Desktop/" + userFileChoice + ".txt");
+		System.out.println("Your grid has been saved to: " + file.toString());
 	}
 
 	/**
@@ -56,7 +62,6 @@ public class FileUtil {
 		}
 		return grid;
 	}
-	
 	/**
 	 * Prints the grid to the console
 	 * @param arr the grid to print

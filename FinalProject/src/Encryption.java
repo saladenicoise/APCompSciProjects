@@ -1,6 +1,11 @@
 import java.io.*;
+//Author: Jules Petit | E Block
 import java.util.*;
 
+/**
+ * Encryption Class
+ * @author Jules Petit | E Block
+ */
 public class Encryption {
 	private static File file;
 	private static BufferedReader f;
@@ -13,7 +18,7 @@ public class Encryption {
 	 * @param modAdd the modular addition number for added security(0 if none)
 	 * @throws IOException
 	 */
-	public static void EncryptFromText(String text, char[][] grid, int modAdd) throws IOException{
+	public static void encryptFromText(String text, char[][] grid, int modAdd) throws IOException{
 		if(modAdd != 0) {
 			numDigits = getDigits(modAdd);
 		}
@@ -65,8 +70,10 @@ public class Encryption {
 					}
 				}
 			}
+			loopOnlyOnce = false;
 		}
 		System.out.println(encoded);
+		System.out.println("Your file has been created at " + file.toString());
 		out.println(encoded);
 		out.close();
 	}
@@ -79,13 +86,15 @@ public class Encryption {
 	 * @throws IOException
 	 * @throws FileNotFoundException
 	 */
-	public static void EncryptFromFile(String fileName, char[][] grid, int modAdd) throws IOException, FileNotFoundException {
+	public static void encryptFromFile(String fileName, char[][] grid, int modAdd) throws IOException, FileNotFoundException {
 		String homeDir = System.getProperty("user.home");
 		file = new File(homeDir + "/Desktop/" + fileName + ".txt");
+		File newFile = new File(homeDir + "/Desktop/" + "encrypted" + fileName + ".txt");
 		f = new BufferedReader(new FileReader(file));
+		boolean loopOnlyOnce = false;
 		Scanner line = new Scanner(f);
-		PrintWriter out = new PrintWriter(new FileWriter(file, true));
-		System.out.println("Will be overwriting file: " + homeDir + "/Desktop/" + fileName + ".txt with new encoded file");
+		PrintWriter out = new PrintWriter(new FileWriter(newFile, true));
+		System.out.println("Will be overwriting file: " + newFile.toString() + " with new encoded file");
 		out.println();
 		out.println("--------------Encrypted Message Below--------------");
 		while(line.hasNextLine()) {
@@ -126,6 +135,9 @@ public class Encryption {
 									d += 2;
 								}
 							}
+						}else if((Character.toString(textChars[c]).equals("0") || Character.toString(textChars[c]).equals("1") || Character.toString(textChars[c]).equals("2") || Character.toString(textChars[c]).equals("3") || Character.toString(textChars[c]).equals("4") || Character.toString(textChars[c]).equals("5") || Character.toString(textChars[c]).equals("6") || Character.toString(textChars[c]).equals("7") || Character.toString(textChars[c]).equals("8") || Character.toString(textChars[c]).equals("9")) && loopOnlyOnce == false) {//Is a digit, therefore we encode it differently
+							encoded += "/" + Character.toString(textChars[c]) + ".";
+							loopOnlyOnce = true;
 						}
 					}
 				}

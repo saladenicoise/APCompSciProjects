@@ -1,7 +1,12 @@
 
 import java.util.*;
+//Author: Jules Petit | E Block
 import java.io.*;
 
+/**
+ * Grid Creator Class
+ * @author Jules Petit | E Block
+ */
 public class GridCreator {
 
 	/**
